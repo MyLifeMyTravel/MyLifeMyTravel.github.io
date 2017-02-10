@@ -1,0 +1,708 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Gradle 实现 Android 多渠道定制化打包 | </title>
+    <meta name="author" content="厉圣杰">
+    
+    <meta name="description" content="希望有一天我能够很坦然地说：&quot;让我来告诉你，在我眼中，这是一个怎样的世界。&quot;">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Gradle 实现 Android 多渠道定制化打包"/>
+    <meta property="og:site_name" content="厉圣杰的博客"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="厉圣杰的博客" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">厉圣杰的博客</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">你的大名</p>
+                        <p class="desc">Web前端/iOS/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Gradle 实现 Android 多渠道定制化打包</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-10-01T04:12:43.000Z"><a href="/2016/10/01/Gradle-实现-Android-多渠道定制化打包/">2016-10-01</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Android/" class="chip pink lighten-1">Android</a>
+        
+            <a href="/tags/Gradle/" class="chip pink lighten-1">Gradle</a>
+        
+            <a href="/tags/多渠道打包/" class="chip pink lighten-1">多渠道打包</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#如何实现多个-Apk-安装在同一设备"><span class="section table-of-contents-text">如何实现多个 Apk 安装在同一设备</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#替换-AndroidManifest-xml-中的属性"><span class="section table-of-contents-text">替换 AndroidManifest.xml 中的属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#替换资源文件"><span class="section table-of-contents-text">替换资源文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#多渠道使用独立签名"><span class="section table-of-contents-text">多渠道使用独立签名</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#利用-Gradle-修改构建版本号"><span class="section table-of-contents-text">利用 Gradle 修改构建版本号</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#补充"><span class="section table-of-contents-text">补充</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#总结"><span class="section table-of-contents-text">总结</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <blockquote>
+<p>版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+</blockquote>
+<p>最近在项目中遇到需要实现 Apk 多渠道、定制化打包， Google 、百度查找了一些资料，成功实现了上述功能，在此记录以备不时之需，温故而知新，可以为师矣~</p>
+<p>需求可以总结如下：<br><img src="http://odsdowehg.bkt.clouddn.com/多渠道打包.png" alt="多渠道打包"></p>
+<h1 id="如何实现多个-Apk-安装在同一设备"><a href="#如何实现多个-Apk-安装在同一设备" class="headerlink" title="如何实现多个 Apk 安装在同一设备"></a>如何实现多个 Apk 安装在同一设备</h1><p>在之前的印象中，同一个应用在同一设备上只能安装一个，除非手动修改 AndroidManifest.xml 文件中的包名（ <code>package</code> ），但这么做的后果就是新的应用真的是新的应用，旧版应用再也收不到更新。而现在你通过 Gradle，你可以轻松构建多个不同版本的应用，并且在同一设备上安装使用。</p>
+<p>这里要用到 <a href="http://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.ProductFlavor.html" target="_blank" rel="external">productFlavors</a> ，productFlavors 可以用来自定义应用构建版本，我们可以用其 <code>applicationId</code> 属性来实现多个 Apk 安装在同一设备上。</p>
+<p>build.gradle 中部分配置代码如下：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    compileSdkVersion <span class="number">24</span></div><div class="line">    buildToolsVersion <span class="string">"24.0.1"</span></div><div class="line"></div><div class="line">    <span class="comment">//默认配置,所有 productFlavors 都会继承 defaultConfig 中配置的属性</span></div><div class="line">    defaultConfig &#123;</div><div class="line">        <span class="comment">//默认的 applicationId,一般与 AndroidManifest.xml 文件 package属性相同</span></div><div class="line">        applicationId <span class="string">"com.littlejie.multichannel"</span></div><div class="line">        minSdkVersion <span class="number">15</span></div><div class="line">        targetSdkVersion <span class="number">24</span></div><div class="line">        versionCode <span class="number">1</span></div><div class="line">        versionName <span class="string">"1.0"</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// productFlavors 定义了一个应用的自定义构建版本</span></div><div class="line">    <span class="comment">//一个单一的项目可以同时定义多个不同的 flavor 来改变应用的输出。</span></div><div class="line">    <span class="comment">// productFlavors 这个概念是为了解决不同的版本之间的差异非常小的情况，通常用于区分同一个应用的不同渠道/客户等，可包含少量业务功能差别。</span></div><div class="line">    <span class="comment">// productFlavors 中的 flavor 不能跟 buildType 中的一样,否则会报: "ProductFlavor names cannot collide with BuildType names"</span></div><div class="line">    productFlavors &#123;</div><div class="line"></div><div class="line">        <span class="comment">//默认版本,不设置 applicationId ,继承 defaultConfig 中的配置</span></div><div class="line">        flavors_default &#123;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//开发版本, applicationId 替换为 com.littlejie.multichannel.dev</span></div><div class="line">        flavors_dev &#123;</div><div class="line">            applicationId <span class="string">"com.littlejie.multichannel.dev"</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//发布版本, applicationId 替换为 com.littlejie.multichannel.release</span></div><div class="line">        flavors_release &#123;</div><div class="line">            applicationId <span class="string">"com.littlejie.multichannel.release"</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>MainActivity.java:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = MainActivity.class.getSimpleName();</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        Log.d(TAG, <span class="string">"package name = "</span> + <span class="keyword">this</span>.getPackageName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在 Android Studio 中执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//打 debug 包，gradle 命令会在后面 `gradle task`中详细讲述</div><div class="line">gradle clean assembleDebug</div></pre></td></tr></table></figure>
+<p>打包完成后，将 Apk 安装到模拟器(<code>adb install name.apk</code>)，运行，log 如下：</p>
+<p>flavors_default:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">09-17 22:43:55.390 19747-19747/com.littlejie.multichannel D/MainActivity: package name = com.littlejie.multichannel</div></pre></td></tr></table></figure>
+<p>flavors_dev:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">09-17 22:11:30.860 2638-2638/com.littlejie.multichannel.dev D/MainActivity: package name = com.littlejie.multichannel.dev</div></pre></td></tr></table></figure>
+<p>flavors_release:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">09-17 22:44:55.610 20650-20650/com.littlejie.multichannel.release D/MainActivity: package name = com.littlejie.multichannel.release</div></pre></td></tr></table></figure>
+<p>从这里可以看出，不同 flavor 的 package name 被 applicationId 替换掉了，而且同一个模拟器上可以同时安装以上三个应用。</p>
+<p>下面我们再看看 AndroidManifest.xml 中发生了什么变化。这里需要用到 aapt 来查看 AndroidManifest.xml 的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//输出 apk 的 AndroidManifest.xml 文件的信息</div><div class="line">aapt dump xmltree ***.apk AndroidManifest.xml</div></pre></td></tr></table></figure>
+<p>关于 aapt 使用的更多用法，可以阅读这篇博文：<a href="http://blog.csdn.net/g19920917/article/details/20244937" target="_blank" rel="external">使用 aapt 查看 apk 的各种信息</a></p>
+<p>下面是 flavors_dev 版本的信息，可以看出 Java 源文件的包名并没有发生改变，而 package 属性的值被替换为 applicationId了。</p>
+<p><strong>如果在申请第三方 SDK 接入，则对应的包名应该填 applicationId ，而不是 AndroidManifest.xml 中的默认值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">lishengjiedeMacBook-Pro:apk littlejie$ aapt dump xmltree multichannel-flavors_dev-debug.apk AndroidManifest.xml</div><div class="line">N: android=http://schemas.android.com/apk/res/android</div><div class="line">  E: manifest (line=2)</div><div class="line">    A: android:versionCode(0x0101021b)=(type 0x10)0x1</div><div class="line">    A: android:versionName(0x0101021c)=&quot;1.0&quot; (Raw: &quot;1.0&quot;)</div><div class="line">    //此处 package 的值已替换成 applicationId 的值</div><div class="line">    A: package=&quot;com.littlejie.multichannel.dev&quot; (Raw: &quot;com.littlejie.multichannel.dev&quot;)</div><div class="line">    A: platformBuildVersionCode=(type 0x10)0x18 (Raw: &quot;24&quot;)</div><div class="line">    A: platformBuildVersionName=(type 0x4)0x40e00000 (Raw: &quot;7.0&quot;)</div><div class="line">    E: uses-sdk (line=7)</div><div class="line">      A: android:minSdkVersion(0x0101020c)=(type 0x10)0xf</div><div class="line">      A: android:targetSdkVersion(0x01010270)=(type 0x10)0x18</div><div class="line">    E: application (line=11)</div><div class="line">      A: android:theme(0x01010000)=@0x7f08008e</div><div class="line">      A: android:label(0x01010001)=@0x7f060020</div><div class="line">      A: android:icon(0x01010002)=@0x7f030000</div><div class="line">      A: android:debuggable(0x0101000f)=(type 0x12)0xffffffff</div><div class="line">      A: android:allowBackup(0x01010280)=(type 0x12)0xffffffff</div><div class="line">      A: android:supportsRtl(0x010103af)=(type 0x12)0xffffffff</div><div class="line">      // Activity 的包名还是原来 AndroidManifest.xml 中申明的</div><div class="line">      E: activity (line=17)</div><div class="line">        A: android:name(0x01010003)=&quot;com.littlejie.multichannel.MainActivity&quot; (Raw: &quot;com.littlejie.multichannel.MainActivity&quot;)</div><div class="line">        E: intent-filter (line=18)</div><div class="line">          E: action (line=19)</div><div class="line">            A: android:name(0x01010003)=&quot;android.intent.action.MAIN&quot; (Raw: &quot;android.intent.action.MAIN&quot;)</div><div class="line">          E: category (line=21)</div><div class="line">            A: android:name(0x01010003)=&quot;android.intent.category.LAUNCHER&quot; (Raw: &quot;android.intent.category.LAUNCHER&quot;)</div></pre></td></tr></table></figure>
+<p>applicationId 的原理可以理解为在 gradle 打包的时，动态合并属性，将 package 替换为 applicationId 指定的值，但并不会替换 Java 文件的包名，包括生成的 R 文件(可以去对应 module 下的 build/generated 目录下查看对应 flavor 的 R 文件)。 </p>
+<p>另外，由于最终生成的包中 AndroidManifest.xml 文件中的 package 属性被 applicationId 替换掉，故对于某些第三方 SDK ，如：微信、高德地图等需要验证包名的，就会碰到相当蛋疼的事，每个包都需要重新去生成 APPID 和 APPKEY，如果渠道很多，那么像微信就会出现问题微信账号申请的应用数就会超出微信的限制。</p>
+<p>Android 官方文档原文如下：</p>
+<blockquote>
+<p>Therefore, we have decoupled the two usages of package name:</p>
+<p>The final package that is used in your built .apk’s manifest, and is the package your app is known as on your device and in the Google Play store, is the “application id”.</p>
+<p>The package that is used in your source code to refer to your R class, and to resolve any relative activity/service registrations, continues to be called the “package”.</p>
+</blockquote>
+<p><strong>补充</strong>：<a href="http://tools.android.com/tech-docs/new-build-system/applicationid-vs-packagename" target="_blank" rel="external">ApplicationId versus PackageName</a></p>
+<h1 id="替换-AndroidManifest-xml-中的属性"><a href="#替换-AndroidManifest-xml-中的属性" class="headerlink" title="替换 AndroidManifest.xml 中的属性"></a>替换 AndroidManifest.xml 中的属性</h1><p>这里可以参考友盟统计 SDK 中使用的方案。该方案通过在 AndroidManifest.xml 文件中 <code>application</code> 标签下指定 <code>&lt;mate-data&gt;</code> 设置占位符来实现动态替换属性值。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta-data</span> <span class="attr">android:name</span>=<span class="string">"UMENG_CHANNEL"</span> <span class="attr">android:value</span>=<span class="string">"$&#123;UMENG_CHANNEL&#125;"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>占位符形如<code>${name}</code>，在最终执行 AndroidManifest.xml 文件合并的时候，占位符会被 build.gradle 中对应值取代。 build.gradle 的配置需要用到上节讲到的 productFlavors 的 <code>manifestPlaceholders</code> 属性， <code>manifestPlaceholders</code> 属性直译过来就是<em>清单文件占位符</em>。</p>
+<p>下面是 <code>build.gradle</code> 的节选代码：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">productFlavors &#123;</div><div class="line"></div><div class="line">   <span class="comment">//将 AndroidManifest.xml 文件中的 $&#123;UMENG_CHANNEL&#125; 替换为 default</span></div><div class="line">   flavors_default &#123;</div><div class="line">       manifestPlaceholders = [UMENG_CHANNEL: <span class="string">"defalut"</span>]</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   flavors_dev &#123;</div><div class="line">       applicationId <span class="string">"com.littlejie.multichannel.dev"</span></div><div class="line">       manifestPlaceholders = [UMENG_CHANNEL: <span class="string">"dev"</span>]</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   flavors_release &#123;</div><div class="line">       applicationId <span class="string">"com.littlejie.multichannel.release"</span></div><div class="line">       manifestPlaceholders = [UMENG_CHANNEL: <span class="string">"release"</span>]</div><div class="line">   &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果你要替换多个属性，则只需要将 <code>manifestPlaceholders</code> 的写法如下：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">manifestPlaceholders = [VALUE_NAME1 : <span class="string">"value"</span> , VALUE_NAME2 : <span class="string">"value"</span>]</div></pre></td></tr></table></figure>
+<p><strong>补充</strong>：关于 AndroidManifest 文件合并规则可以查看 <a href="http://tools.android.com/tech-docs/new-build-system/user-guide/manifest-merger" target="_blank" rel="external">官方文档</a></p>
+<h1 id="替换资源文件"><a href="#替换资源文件" class="headerlink" title="替换资源文件"></a>替换资源文件</h1><p>多渠道打包的时候可能会碰到这种情况：每个应用市场的启动页图标、应用名称可能会有点小出入，更有甚者，连布局都不一样。这时候我们该怎么办呢？</p>
+<p>有一种解决办法就是：在代码里进行判断，根据渠道的不一样，加载不同的图片和布局，这是一种解决办法。但是当渠道有很多时，代码就会变得很难维护，而且指定渠道用到的资源文件都会被打入所有 Apk 中。所以这个方法并不值得推荐。那么，有什么好的解决办法呢？</p>
+<p>办法 Google 早就给我们想好了，而且相当简单，那就是：<strong>在 main 的同级目录下创建以渠道名命名的文件夹，然后创建资源文件（路径要与 main 中的一致），然后打包的时候 gradle 就会自己替换或者合并资源。</strong></p>
+<p>例如， App 的默认 icon 路径为 <code>main\res\mipmap-hdpi\ic_launcher.png</code> ，那么 flavors_dev的路径就为 <code>flavors_dev\res\mipmap-hdpi\ic_launcher.png</code> ，打包 flavors_dev 渠道的时候会自动替换图片。</p>
+<p>对于资源合并，如果在 main 下的 strings.xml 内容为：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"app_name"</span>&gt;</span>MultiChannel<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"string_merge"</span>&gt;</span>我是string,我暂时没被合并<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在 flavors_dev 下的 strings.xml 内容为：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"string_merge"</span>&gt;</span>我是dev_string,我会把string合并<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>当打 flavors_dev 渠道包时，最终 strings.xml 会变成：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"app_name"</span>&gt;</span>MultiChannel<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"string_merge"</span>&gt;</span>我是dev_string,我会把string合并<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>以上特性可以用来<strong>替换 Apk 的应用名称和应用图标</strong>，这比使用前面讲到的占位符方便很多。同理，替换图片和合并颜色的原理也相似。</p>
+<h1 id="多渠道使用独立签名"><a href="#多渠道使用独立签名" class="headerlink" title="多渠道使用独立签名"></a>多渠道使用独立签名</h1><p>多渠道打包的时候，可能每个渠道包的签名都必须不一样，真正做到定制化，那么，怎么实现每个渠道包使用指定的签名呢？</p>
+<p>平时我们打包的时候是这样的：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">signingConfigs &#123;</div><div class="line">   release &#123;</div><div class="line">       storeFile <span class="keyword">file</span>(<span class="string">"签名文件路径"</span>)</div><div class="line">       storePassword <span class="string">"storePassword"</span></div><div class="line">       keyAlias <span class="string">"keyAlias"</span></div><div class="line">       keyPassword <span class="string">"keyPassword"</span></div><div class="line">   &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">buildTypes &#123;</div><div class="line">   release &#123;</div><div class="line">       minifyEnabled <span class="keyword">true</span></div><div class="line">       proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></div><div class="line">       shrinkResources <span class="keyword">true</span></div><div class="line">       <span class="comment">//指定打 release 包时使用的签名文件</span></div><div class="line">       signingConfig signingConfigs.release</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="comment">//如果 debug 包需要测试诸如微信、地图等第三方 sdk ，则可以指定 debug 包使用 release 包的签名</span></div><div class="line">   <span class="comment">//debug &#123;</span></div><div class="line">   <span class="comment">//    signingConfig signingConfigs.release</span></div><div class="line">   <span class="comment">//&#125;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而给每个渠道包指定签名其实也差不多。</p>
+<p>Google 官方原话：</p>
+<blockquote>
+<p>This enables either having all release packages share the same SigningConfig, by setting android.buildTypes.release.signingConfig, or have each release package use their own SigningConfig by setting each android.productFlavors.*.signingConfig objects separately.</p>
+</blockquote>
+<p>大意就是，在 buildType 下指定签名的具体属性，形如 <code>android.productFlavors.*.signingConfig signingConfigs.*</code> ，前一个 <code>*</code> 指代在 productFlavors 中定义的 flavor ，后一个 <code>*</code> 指代在 signingConfigs 定义的属性。值得注意的是，signingConfigs 必须定义在 buildType 之前。</p>
+<p>以下是 build.gradle 的配置节选：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义签名属性</span></div><div class="line">signingConfigs &#123;</div><div class="line">   flavors_default &#123;</div><div class="line">       <span class="comment">//如果签名文件在项目的根目录下,则可以这么写</span></div><div class="line">       storeFile <span class="keyword">file</span>(<span class="string">"../littlejie.jks"</span>)</div><div class="line">       storePassword <span class="string">"******"</span></div><div class="line">       keyAlias <span class="string">"******"</span></div><div class="line">       keyPassword <span class="string">"*****"</span></div><div class="line">   &#125;</div><div class="line"></div><div class="line">   flavors_dev &#123;</div><div class="line">       storeFile <span class="keyword">file</span>(<span class="string">"../littlejie_dev.jks"</span>)</div><div class="line">       storePassword <span class="string">"*****"</span></div><div class="line">       keyAlias <span class="string">"*****"</span></div><div class="line">       keyPassword <span class="string">"*****"</span></div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">buildTypes &#123;</div><div class="line">   release &#123;</div><div class="line">       minifyEnabled <span class="keyword">true</span></div><div class="line">       proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></div><div class="line">       shrinkResources <span class="keyword">true</span></div><div class="line"></div><div class="line">       <span class="comment">//多个 flavor ,指定 flavor 使用指定 签名</span></div><div class="line">       productFlavors.flavors_default.signingConfig signingConfigs.flavors_default</div><div class="line">       productFlavors.flavors_dev.signingConfig signingConfigs.flavors_dev</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="comment">//如果 debug 包需要测试诸如微信、地图等第三方 sdk ，则可以指定 debug 包使用 release 包的签名</span></div><div class="line">   <span class="comment">//debug 并不能设置多个签名</span></div><div class="line">   <span class="comment">//debug &#123;</span></div><div class="line">   <span class="comment">//   productFlavors.flavors_default.signingConfig signingConfigs.flavors_default</span></div><div class="line">   <span class="comment">//   productFlavors.flavors_dev.signingConfig signingConfigs.flavors_dev</span></div><div class="line">   <span class="comment">//&#125;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面我们来验证下生成的包的签名是否正确，查看签名我们会用到如下两个命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//查看签名文件的属性</div><div class="line">keytool -list -keystore 签名文件</div><div class="line"></div><div class="line">//查看 apk 的签名，需要提前解压 apk ，获取 CERT.RSA（位于解压目录下 /META-INF 下）</div><div class="line">//以下命令行是在 apk 解压目录下执行</div><div class="line">keytool -printcert -file META-INF/CERT.RSA</div></pre></td></tr></table></figure>
+<p>更多 keytool 命令使用可以查看 <a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html" target="_blank" rel="external">官方文档</a></p>
+<p>首先，我们来看下 littlejie.jks 的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">lishengjiedeMacBook-Pro:AndroidDemo littlejie$ keytool -list -keystore littlejie.jks</div><div class="line">输入密钥库口令:</div><div class="line"></div><div class="line">密钥库类型: JKS</div><div class="line">密钥库提供方: SUN</div><div class="line"></div><div class="line">您的密钥库包含 1 个条目</div><div class="line"></div><div class="line">littlejie, 2016-9-18, PrivateKeyEntry,</div><div class="line">证书指纹 (SHA1): A2:B1:BF:BF:F1:F3:26:F4:FD:0C:94:95:B5:32:90:69:24:F7:99:84</div></pre></td></tr></table></figure>
+<p>解压 multichannel-flavors_default-release.apk ，查看 CERT.RSA 信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">lishengjiedeMacBook-Pro:apk littlejie$ keytool -printcert -file multichannel-flavors_default-release/META-INF/CERT.RSA</div><div class="line">所有者: CN=littlejie</div><div class="line">发布者: CN=littlejie</div><div class="line">序列号: 71693e05</div><div class="line">有效期开始日期: Sun Sep 18 17:20:34 CST 2016, 截止日期: Thu Sep 12 17:20:34 CST 2041</div><div class="line">证书指纹:</div><div class="line">	 MD5: AC:12:83:51:44:FC:82:68:8B:23:7B:E9:12:24:AE:52</div><div class="line">	 SHA1: A2:B1:BF:BF:F1:F3:26:F4:FD:0C:94:95:B5:32:90:69:24:F7:99:84</div><div class="line">	 SHA256: AD:04:19:5F:92:00:0D:FA:7C:E5:8A:12:57:72:4C:1E:0E:2E:FC:0D:92:28:05:D0:CC:42:FC:93:95:44:88:88</div><div class="line">	 签名算法名称: SHA256withRSA</div><div class="line">	 版本: 3</div></pre></td></tr></table></figure>
+<p>可以发现两者的 SHA1 值是相等的。</p>
+<p>同理，可以查看 littlejie_dev.jks 和 multichannel-flavors_dev-release.apk 的签名信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//littlejie_dev.jks 的签名信息</div><div class="line">lishengjiedeMacBook-Pro:AndroidDemo littlejie$ keytool -list -keystore littlejie_dev.jks</div><div class="line">输入密钥库口令:</div><div class="line"></div><div class="line">密钥库类型: JKS</div><div class="line">密钥库提供方: SUN</div><div class="line"></div><div class="line">您的密钥库包含 1 个条目</div><div class="line"></div><div class="line">littlejie, 2016-9-18, PrivateKeyEntry,</div><div class="line">证书指纹 (SHA1): B4:25:67:A5:9F:8C:1F:12:BD:85:6B:2D:FE:71:62:57:8A:CC:AE:E2</div><div class="line"></div><div class="line">//multichannel-flavors_dev-release.apk 的签名信息</div><div class="line">lishengjiedeMacBook-Pro:apk littlejie$ keytool -printcert -file multichannel-flavors_dev-release/META-INF/CERT.RSA</div><div class="line">所有者: CN=littlejie</div><div class="line">发布者: CN=littlejie</div><div class="line">序列号: 48346e15</div><div class="line">有效期开始日期: Sun Sep 18 17:21:23 CST 2016, 截止日期: Thu Sep 12 17:21:23 CST 2041</div><div class="line">证书指纹:</div><div class="line">	 MD5: 15:E9:E1:67:AB:33:8B:04:A4:C3:D0:05:8F:A6:35:37</div><div class="line">	 SHA1: B4:25:67:A5:9F:8C:1F:12:BD:85:6B:2D:FE:71:62:57:8A:CC:AE:E2</div><div class="line">	 SHA256: 96:A5:14:EC:28:25:32:0D:3E:D0:DB:D0:84:06:E7:9C:17:D7:91:83:A4:51:93:AB:34:3E:D9:FD:C5:FA:A1:8E</div><div class="line">	 签名算法名称: SHA256withRSA</div><div class="line">	 版本: 3</div></pre></td></tr></table></figure>
+<p>但是这里有个问题，就是这种给某个 flavor 指定签名的方法对 debug 无效，有兴趣的同学可以看上述注释掉的 debug 签名部分配置。简单来说，debug 签名只能指定一个或者使用默认的 debug 签名。</p>
+<p>若哪位大神有解决方案，欢迎指出~</p>
+<p>这里再做几点补充：</p>
+<ol>
+<li>多渠道使用独立签名，<strong>打包时千万不要使用 Android Studio 中 Build 菜单下的 Generate Signed APK</strong>，因为当你使用这个打包的时候， Android Studio 会让你指定使用的签名文件， so 你就等着哭吧~楼主因为这个折腾了半天。解决方法就是使用 gradle tasks。传送门：<a href="http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Android-tasks" target="_blank" rel="external">Android Gradle Build Tasks</a></li>
+<li>鉴于第一点中的传送门需要翻墙，所以在这里简单介绍一下 <a href="http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Android-tasks" target="_blank" rel="external">Android Gradle Build Tasks</a> 的使用。<ul>
+<li>打全部包： <code>gradle assemble</code></li>
+<li>打全部 Debug 包： <code>gradle assembleDebug</code> ，可以简写为 <code>gradle aD</code> ，前提是没有相同缩写的参数</li>
+<li>打全部 Release 包： <code>gradle assembleRelease</code>，可以简写为 <code>gradle aR</code></li>
+<li>打指定 flavor 包： <code>gradle assemble(flavor)(Debug|Release)</code></li>
+<li>打包完成后安装（设备上没有安装该 apk ，否则会失败，而且只能指定 flavor ，不然也会失败）： <code>gradle install(flavor)（Debug|Release）</code></li>
+<li>打包前先 clean 一下(在测试的时候很必要，如果不 clean 的话，可能会导致某些小修改不会及时打入新包)： <code>gradle clean assembleDebug</code></li>
+</ul>
+</li>
+</ol>
+<h1 id="利用-Gradle-修改构建版本号"><a href="#利用-Gradle-修改构建版本号" class="headerlink" title="利用 Gradle 修改构建版本号"></a>利用 Gradle 修改构建版本号</h1><p>楼主表示对 Groovy 不是很熟，所以利用 Gradle 自动修改构建版本这个就先留着，我先去研究几天~</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>有童鞋在评论中说：使用 productFlavors 打包效率太低，的确是这样， gradle 好用是好用，就是打包效率低。如果只是单纯生成渠道包，建议使用<a href="http://tech.meituan.com/mt-apk-packaging.html" target="_blank" rel="external">美团多渠道打包方案</a>，另外 360 加固也是一种不错的选择，效率都比使用 gradle 来的高。但如果需要替换 Apk 中的图片、字符串、应用的 applicationId 、给指定渠道的包使用指定的签名，那么只能乖乖使用 gradle 打包了，慢你也得忍着~</p>
+<p>之前刚开始调研的时候，发现 Github 上有个 <a href="https://github.com/SSOOnline/ApkCustomizationTool" target="_blank" rel="external">ApkCustomizationTool</a> 项目，它是通过对 Apk 解包，替换图片、字符串，然后重新签名，不过这毕竟是事后诸葛亮，控制在打包的源头总是毕竟好的，有兴趣的同学可以去研究下。</p>
+<p>不知大家有没有这种感受，每次发版上传渠道的时候想死有没有？o(╯□╰)o</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上就是自己在使用 Gradle 实现 Android 多渠道打包时碰到的问题， Android 官方关于使用 Gradle 的<a href="http://tools.android.com/tech-docs/new-build-system/user-guide" target="_blank" rel="external">文档</a>已经很详细了，自己总结的只是一点皮毛，有时间要去自习研读下。</p>
+<p>工作一年多，愣是没有写博客做总结，好多东西都是用过就忘，下次要用再找，没有成体系的 Android 知识结构，对工资不满意，可就连想跳槽面试都没底气。这次写这篇博客画了思维导图，自以为逻辑清晰了，可是真正要把这些东西讲述清楚，还真是一件麻烦的事~看来，自己还有很长的路要走~</p>
+<p>这段时间自己也在思考，是转行还是去考事业编制，还是继续做 Android。转行，除了编程自己好像别的什么也不会，当然自己编程也做的不怎么好。考事业编制，这个可以考虑，毕竟再很多人眼里这是个旱涝保收的职业。继续做 Android ，这个也不错，除了每次都花大把时间用来改 UI，别的都还不错（吐槽产品）。</p>
+<p>话说，有没有什么工作，自由、上班时间少、工资高的？当然没有，至少现阶段的自己是接触不到的，所以，骚年，还是努力吧！多读书、多看报、多运动，少吃零食多睡觉~</p>
+<p>恩，算是对工作一年多的总结也是吐槽~</p>
+<blockquote>
+<p>读万卷书，行万里路~</p>
+</blockquote>
+<p><strong>参考</strong>：</p>
+<ol>
+<li><a href="http://tools.android.com/tech-docs/new-build-system/user-guide" target="_blank" rel="external">Gradle Plugin User Guide</a></li>
+<li><a href="http://google.github.io/android-gradle-dsl/current/" target="_blank" rel="external">Android Plugin DSL Reference</a></li>
+<li><a href="http://unclechen.github.io/2015/10/22/Android-Studio-Gradle%E5%AE%9E%E8%B7%B5%E4%B9%8B%E5%A4%9A%E6%B8%A0%E9%81%93%E8%87%AA%E5%8A%A8%E5%8C%96%E6%89%93%E5%8C%85+%E7%89%88%E6%9C%AC%E5%8F%B7%E7%AE%A1%E7%90%86/" target="_blank" rel="external">Android Studio Gradle实践之多渠道自动化打包+版本号管理</a></li>
+</ol>
+
+                
+<p class="pink-link-context">
+    <a href="/2017/02/04/hello-world/" rel="next" title="Hello World">
+    上一篇：Hello World
+  </a>
+</p>
+
+
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/10/01/Gradle-实现-Android-多渠道定制化打包/" data-title="Gradle 实现 Android 多渠道定制化打包" data-url="http://www.littlejie.com/2016/10/01/Gradle-实现-Android-多渠道定制化打包/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: '厉圣杰'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
