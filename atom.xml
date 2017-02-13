@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>厉圣杰的博客</title>
-  
+  <subtitle>啦啦啦，德玛西亚</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.littlejie.com/"/>
-  <updated>2017-02-04T06:08:54.000Z</updated>
+  <updated>2017-02-13T12:31:35.000Z</updated>
   <id>http://www.littlejie.com/</id>
   
   <author>
@@ -16,29 +16,231 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://www.littlejie.com/2017/02/04/hello-world/"/>
-    <id>http://www.littlejie.com/2017/02/04/hello-world/</id>
-    <published>2017-02-04T06:08:54.000Z</published>
-    <updated>2017-02-04T06:08:54.000Z</updated>
+    <title>Android 开发规范</title>
+    <link href="http://www.littlejie.com/2017/02/13/Android-%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"/>
+    <id>http://www.littlejie.com/2017/02/13/Android-开发规范/</id>
+    <published>2017-02-13T12:15:23.000Z</published>
+    <updated>2017-02-13T12:31:35.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <content type="html"><![CDATA[<p>个人总结的 Android 开发规范初稿，其中控件缩写及 Android 资源文件命名部分不是很确定，有待商榷。Java 部分编程风格请参考：<a href="http://www.hawstein.com/posts/google-java-style.html" target="_blank" rel="external">Google Java 命名规范</a>。</p>
+<h2 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h2><ol>
+<li>统一调整 IDE 的编码方式为 UTF-8<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/01.png" alt="01" title="">
+                </div>
+                <div class="image-caption">01</div>
+            </figure></li>
+</ol>
+<ul>
+<li>统一调整 IDE 的 Tab 缩进为 4 个空格<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/0.png" alt="0" title="">
+                </div>
+                <div class="image-caption">0</div>
+            </figure></li>
+<li><p>花括号不要单独一行，和它前面的代码同一行。而且，花括号与前面的代码之间用一个空格隔开。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123; <span class="comment">// Good </span></div><div class="line"> </div><div class="line">&#125; </div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span></div><div class="line">&#123; <span class="comment">// Bad</span></div><div class="line">&#125; </div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>&#123; <span class="comment">// Bad</span></div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>空格的使用：if、else、for、switch、while等逻辑关键字与后面的语句留一个空格隔开。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Good</span></div><div class="line"><span class="keyword">if</span> (booleanVariable) &#123;</div><div class="line">    <span class="comment">// TODO while booleanVariable is true</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// TODO else</span></div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="comment">// Bad</span></div><div class="line"><span class="keyword">if</span>(booleanVariable) &#123;</div><div class="line">    <span class="comment">// TODO while booleanVariable is true</span></div><div class="line">&#125;<span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// TODO else</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 运算符两边各用一个空格隔开。</span></div><div class="line"><span class="keyword">int</span> result = a + b; <span class="comment">//Good, = 和 + 两边各用一个空格隔开</span></div><div class="line"><span class="keyword">int</span> result=a+b; <span class="comment">//Bad,=和+两边没用空格隔开</span></div><div class="line"></div><div class="line"><span class="comment">// 方法的每个参数之间用一个空格隔开。</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(String param1, String param2)</span></span>; <span class="comment">// Good，param1后面的逗号与String之间隔了一个空格</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(param1, param2)</span></span>; <span class="comment">// Good，方法调用时，param1后面的逗号与param2之间隔了一个空格</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(param1,param2)</span></span>; <span class="comment">// Bad，没有用一个空格隔开</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>空行的使用，拒绝拖沓无分割，关联代码段放一块并与后面代码分割</p>
+<ul>
+<li>两个方法之间</li>
+<li>方法内的两个逻辑段之间</li>
+<li>方法内的局部变量和方法的第一条逻辑语句之间</li>
+<li>常量和变量之间</li>
+<li><strong>方法名和方法内第一条语句不要有空格</strong></li>
+</ul>
+</li>
+<li>Activity.onCreate()，Fragment.onActivityCreated()，作为程序入口，不要写入太多代码，尽量保持只调用 initXXX() 方法，简单明了展示调用过程。如：initData()，initView()。可在 BaseActivity 、 BaseFragment 中实现 init 执行顺序，子类实现，即 <strong>模板方法模式</strong>。</li>
+<li><strong>Application 中只执行应用初始化相关操作，尽量不要涉及业务逻辑。如有，请单独剥离。参考第 6 条</strong></li>
+<li>单个方法体不要过长，最好不要超过一屏，竖屏显示器请无视~</li>
+<li>一行声明一个变量，不要一行声明多个变量，这样有利于写注释。</li>
+<li>代码任何地方不要拼错单词</li>
+<li><p><strong>代码必须格式化</strong></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Windows：CTRL + ALT + L</div><div class="line">Mac：OPTION + COMMAND + L</div></pre></td></tr></table></figure>
+</li>
+<li><p>文字大小的单位统一用 sp，元素大小的单位统一用 dp；应用中的字符串统一在 <code>/values/strings.xml</code> 中定义；颜色值统一在 <code>/values/colors.xml</code> 中定义；菜单定义统一放在 <code>/menu/****.xml</code> 中；自定义View 属性统一在 <code>/values/attrs.xml</code> 中；自定义drawable 文件统一在 <code>/drawable/****.xml</code> 中；自定义样式统一在 <code>/values/styles.xml</code>。</p>
+</li>
+<li>调用方法保持“临近原则”，被调用的方法，放在调用方法下方</li>
+<li>用好 TODO 标记<ul>
+<li>记录想法，记录功能点，开发过程中可以利用 TODO 记录一下临时想法或为了不打扰思路留下待完善的说明</li>
+<li>删除无用 TODO ，开发工具自动生成的 TODO ，或则已经完善的 TODO ，一定要删除。</li>
+</ul>
+</li>
+<li>处理“魔法数字”等看不懂的神秘数字<ul>
+<li>代码中不要出现数字，特别是一些标识不同类型的数字。</li>
+<li>所有意义数字全部抽取到 Constant 公共类中，避免散布在各位类中。</li>
+<li>所有有意义的字符串公共常量全部抽取到 Constant 公共类中</li>
+</ul>
+</li>
+</ul>
+<h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><p><strong>命名除了要遵守以下规范，还得见名知意。</strong></p>
+<h3 id="类和接口命名"><a href="#类和接口命名" class="headerlink" title="类和接口命名"></a>类和接口命名</h3><p>使用大驼峰规则，用名词或名词词组命名，每个单词的首字母大写。<br>以下为几种常用类的命名：</p>
+<ul>
+<li>Activity 类，命名以 Activity 为后缀，如：<code>LoginActivity</code></li>
+<li>Fragment 类，命名以 Fragment 为后缀，如：<code>LoginFragment</code></li>
+<li>Service 类，命名以 Service 为后缀，如：<code>DownloadService</code></li>
+<li>Adapter 类，命名以 Adapter 为后缀，如：<code>CouponAdapter</code></li>
+<li>工具类，命名以 Util 为后缀，如：<code>EncryptUtil</code></li>
+<li>模型类，命名以 Info 为后缀，如：<code>UserInfo</code></li>
+<li>接口实现类，命名以 Impl 为后缀，如：<code>ApiImpl</code></li>
+</ul>
+<h3 id="方法命名"><a href="#方法命名" class="headerlink" title="方法命名"></a>方法命名</h3><p>使用小驼峰规则，用动词命名，<strong>第一个单词的首字母小写</strong>，其他单词的首字母大写。以下为几种常用方法的命名：</p>
+<ul>
+<li>初始化方法，命名以 init 开头，例：initView()</li>
+<li>按钮点击方法或 Activity 跳转方法，命名以 to 开头，例：toLogin()、toMainActivity()</li>
+<li>设置方法，命名以 set 开头，例：setData()</li>
+<li>具有返回值的获取方法，命名以 get 开头，例：getData()</li>
+<li>通过异步加载数据的方法，命名以 load 开头，例：loadData()</li>
+<li>布尔型的判断方法，命名以 is 或 has ，或具有逻辑意义的单词如 equals ，例：isEmpty()</li>
+</ul>
+<h3 id="常量命名"><a href="#常量命名" class="headerlink" title="常量命名"></a>常量命名</h3><p>全部为大写单词，单词之间用下划线分开。常量一般放在 <code>Constant</code> 类</p>
+<ul>
+<li>Intent 参数以 <strong>PARAM_EXTRA</strong> 开头 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Intent 参数</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String PARAM_EXTRA_ID = <span class="string">"id"</span>;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> PAGE_SIZE = <span class="number">20</span>;</div></pre></td></tr></table></figure>
+<h3 id="变量命名"><a href="#变量命名" class="headerlink" title="变量命名"></a>变量命名</h3><p>使用驼峰规则，首字母必须小写，使用名词或名词词组。要求简单易懂，富于描述，不允许出现无意义或错误单词。</p>
+<ul>
+<li>成员变量命名以 <code>mCamelCase</code> 样式命名</li>
+<li><strong>boolean 类型的成员变量命名可以不遵循第一条</strong>，以 <code>lowerCamelCase</code> 样式命名</li>
+<li>控件变量命名都已 控件缩写 + 控件作用 来命名，如：登录按钮命名为 mBtnLogin；</li>
+<li>参数变量、临时变量都已 <code>lowerCamelCase</code> 样式命名</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Button mBtnLogin;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isLaunch;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">(String text)</span> </span>&#123;</div><div class="line">        <span class="comment">// Todo...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="控件缩写"><a href="#控件缩写" class="headerlink" title="控件缩写"></a>控件缩写</h3><p>常见控件缩写约定如下：</p>
+<ul>
+<li>TextView: tv</li>
+<li>EditText: edt</li>
+<li>Button: btn</li>
+<li>RadioButton: rb</li>
+<li>ImageButton: ib</li>
+<li>ImageView: iv</li>
+<li>RelativeLayout/LinearLayout/FrameLayout: rl , ll , fl</li>
+<li>ListView: lv</li>
+<li>WebView: web</li>
+<li>CheckBox: cbx</li>
+</ul>
+<h3 id="控件-id-命名"><a href="#控件-id-命名" class="headerlink" title="控件 id 命名"></a>控件 id 命名</h3><p>控件缩写_含义，范围可选，只在有明确定义的范围内才需要加上。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 这是标题栏的标题 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/tv_header_title"</span></div><div class="line">    <span class="attr">...</span> /&gt;</div><div class="line"> </div><div class="line"><span class="tag">&lt;<span class="name">--</span> 这是登录按钮 <span class="attr">--</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/btn_login"</span></div><div class="line">    <span class="attr">...</span> /&gt;</div></pre></td></tr></table></figure>
+<h3 id="布局文件命名"><a href="#布局文件命名" class="headerlink" title="布局文件命名"></a>布局文件命名</h3><ul>
+<li>Activity 布局：activity_类名.xml，建议使用 Android Studio 生成</li>
+<li>Fragment 布局：fragment_类名.xml</li>
+<li>控件布局：widget_控件名.xml</li>
+<li>Adapter Item 布局：item_适配器名.xml</li>
+</ul>
+<h3 id="strings-xml-命名"><a href="#strings-xml-命名" class="headerlink" title="strings.xml 命名"></a>strings.xml 命名</h3><p>类型<em>{范围}</em>功能，范围可选。<br>以下为几种常用的命名：</p>
+<ul>
+<li>页面标题，命名格式为：title_页面</li>
+<li>按钮文字，命名格式为：btn_按钮事件</li>
+<li>标签文字，命名格式为：label_标签文字</li>
+<li>选项卡文字，命名格式为：tab_选项卡文字</li>
+<li>消息框文字，命名格式为：toast_消息</li>
+<li>编辑框的提示文字，命名格式为：hint_提示信息</li>
+<li>图片的描述文字，命名格式为：desc_图片文字</li>
+<li>对话框的文字，命名格式为：dialog_文字</li>
+<li>menu 的 item 文字，命名格式为：menu_文字</li>
+</ul>
+<h3 id="colors-xml-命名"><a href="#colors-xml-命名" class="headerlink" title="colors.xml 命名"></a>colors.xml 命名</h3><p>前缀{<em>控件}{</em>范围}{_后缀}，控件、范围、后缀可选，但控件和范围至少要有一个。</p>
+<ul>
+<li>背景颜色，添加 bg 前缀</li>
+<li>文本颜色，添加 text 前缀</li>
+<li>分割线颜色，添加 div 前缀</li>
+<li>区分状态时，默认状态的颜色，添加 normal 后缀</li>
+<li>区分状态时，按下时的颜色，添加 pressed 后缀</li>
+<li>区分状态时，选中时的颜色，添加 selected 后缀</li>
+<li>区分状态时，不可用时的颜色，添加 disable 后缀</li>
+</ul>
+<h3 id="drawable的命名"><a href="#drawable的命名" class="headerlink" title="drawable的命名"></a>drawable的命名</h3><p>前缀{<em>控件}{</em>范围}{_后缀}，控件、范围、后缀可选，但控件和范围至少要有一个。</p>
+<ul>
+<li>图标类，添加 ic 前缀</li>
+<li>背景类，添加 bg 前缀</li>
+<li>分隔类，添加 div 前缀</li>
+<li>默认类，添加 def 前缀</li>
+<li>区分状态时，默认状态，添加 normal 后缀</li>
+<li>区分状态时，按下时的状态，添加 pressed 后缀</li>
+<li>区分状态时，选中时的状态，添加 selected 后缀</li>
+<li>区分状态时，不可用时的状态，添加 disable 后缀</li>
+<li>多种状态的，添加 selector 后缀（一般为 ListView 的 selector 或按钮的 selector ）</li>
+</ul>
+<h2 id="注释规范"><a href="#注释规范" class="headerlink" title="注释规范"></a>注释规范</h2><h3 id="类和接口注释"><a href="#类和接口注释" class="headerlink" title="类和接口注释"></a>类和接口注释</h3><p>类和接口统一添加javadoc注释，格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 类或接口的描述信息</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> $&#123;USER&#125;</div><div class="line"> * <span class="doctag">@date</span> $&#123;DATE&#125;</div><div class="line"> */</div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Login</span> </span>&#123;</div><div class="line"> </div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h3 id="方法注释"><a href="#方法注释" class="headerlink" title="方法注释"></a>方法注释</h3><p>下面几种方法，都必须添加注释，说明该方法的用途和参数说明，以及返回值。<strong>如不添加注释，方法和参数命名都要见名知意</strong></p>
+<ul>
+<li>接口中定义的所有方法</li>
+<li>抽象类中自定义的抽象方法</li>
+<li>抽象父类的自定义公用方法</li>
+<li>工具类的公用方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 登录</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> loginName 登录名</div><div class="line"> * <span class="doctag">@param</span> password 密码</div><div class="line"> * <span class="doctag">@param</span> listener 回调监听器</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">(String loginName, String password, ActionCallbackListener listener)</span></span>;</div></pre></td></tr></table></figure>
+<h3 id="变量和常量注释"><a href="#变量和常量注释" class="headerlink" title="变量和常量注释"></a>变量和常量注释</h3><p>下面几种情况下的常量和变量，都要添加注释说明，优先采用 右侧// 来注释，若注释说明太长则在上方添加注释。</p>
+<ul>
+<li>接口中定义的所有常量</li>
+<li>公有类的公有常量</li>
+<li>枚举类定义的所有枚举常量</li>
+<li>实体类的所有属性变量</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_CASH = <span class="number">1</span>; <span class="comment">// 现金券</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_DEBIT = <span class="number">2</span>; <span class="comment">// 抵扣券</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_DISCOUNT = <span class="number">3</span>; <span class="comment">// 折扣券</span></div><div class="line"> </div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> id; <span class="comment">// 券id</span></div><div class="line"><span class="keyword">private</span> String name; <span class="comment">// 券名称</span></div><div class="line"><span class="keyword">private</span> String introduce; <span class="comment">// 券简介</span></div></pre></td></tr></table></figure>
+<h2 id="发布及安全"><a href="#发布及安全" class="headerlink" title="发布及安全"></a>发布及安全</h2><h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><p><strong>版本管理一般使用 Git</strong></p>
+<ul>
+<li>打包前必须pull一下代码</li>
+<li><strong>打包发版后，打上tag，push代码</strong></li>
+<li><strong>打包后记得保存未加密过的包和mapping文件</strong></li>
+</ul>
+<ol>
+<li>建议使用 Git 进行版本管理，正式打包前先 pull 一下代码，保证发布版本为最新代码；版本发布后，打 tag 并 push 到服务器</li>
+<li><p>正式版本需要打开 <strong>混淆</strong>，防止被反编译，gradle 项目在 buildTypes 中配置，混淆的配置文件为 proguard-android.txt</p>
+ <figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//必须在productFlavors之后</span></div><div class="line">buildTypes &#123;</div><div class="line">   release &#123;</div><div class="line">       <span class="comment">//开启混淆</span></div><div class="line">       minifyEnabled <span class="keyword">true</span></div><div class="line">       <span class="comment">//打包时移除不用资源</span></div><div class="line">       shrinkResources <span class="keyword">true</span></div><div class="line">       proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></div><div class="line">       <span class="comment">//不同渠道使用不同的签名</span></div><div class="line">       signingConfig signingConfigs.sign</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   debug &#123;</div><div class="line">       signingConfig signingConfigs.sign</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>正式版本发布时需要关闭 Log ，防止 Log 调试信息的打印造成重要数据泄露。一般思路为封装 LogUtil，在其中根据 <strong>BuildConfig.Debug</strong> 判断是否输出日志</p>
+</li>
+<li>测试第三方SDK时，如对签名有要求，可以在 debug 时使用正式签名</li>
+<li>正式发布版本时，可用第三方工具加密，如：360加密、爱加密，<strong>加密后最好测试下，可能会有兼容性问题</strong></li>
+<li>打包后记得保存未加密的包并保存 mapping 文件(列出了原始的类，方法和字段名与混淆后代码间的映射)</li>
+</ol>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><ol>
+<li><p>控制语句</p>
+<ul>
+<li><p>减少条件嵌套，不要超过3层</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Bad</span></div><div class="line"><span class="keyword">if</span>(obj != <span class="keyword">null</span>) &#123; doSomething(); &#125;</div><div class="line"><span class="comment">// Good</span></div><div class="line"><span class="keyword">if</span>(obj == <span class="keyword">null</span>) &#123; <span class="keyword">return</span>; &#125; doSomething();</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>if语句必须用{}包括起来,即便是只有一句</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>方法<ul>
+<li>拆分臃肿方法，每个方法只作一件事</li>
+<li>做同一个逻辑的方法，尽量靠近放到一块，方便查看</li>
+<li><strong>尽量不要使用 try catch 处理业务逻辑</strong></li>
+<li>使用JSON工具类，不要手动解析和拼装数据，如：Gson</li>
+</ul>
+</li>
+<li>重构相关书籍<ul>
+<li>《重构-改善既有代码的设计》</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>关于 colors.xml 和 drawable 命名很久之前摘自某篇博文，忘记具体链接了，如有侵权，请联系我~</p>
+<blockquote>
+<p>邮箱：1025263614@qq.com</p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;p&gt;个人总结的 Android 开发规范初稿，其中控件缩写及 Android 资源文件命名部分不是很确定，有待商榷。Java 部分编程风格请参考：&lt;a href=&quot;http://www.hawstein.com/posts/google-java-style.html&quot; tar
     
     </summary>
     
+    
+      <category term="Android" scheme="http://www.littlejie.com/tags/Android/"/>
+    
+      <category term="开发规范" scheme="http://www.littlejie.com/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"/>
     
   </entry>
   
