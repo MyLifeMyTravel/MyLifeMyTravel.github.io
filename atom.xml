@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.littlejie.com/"/>
-  <updated>2017-02-13T12:36:50.000Z</updated>
+  <updated>2017-02-13T23:47:28.000Z</updated>
   <id>http://www.littlejie.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.littlejie.com/2017/02/13/Android-%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"/>
     <id>http://www.littlejie.com/2017/02/13/Android-开发规范/</id>
     <published>2017-02-13T12:15:23.000Z</published>
-    <updated>2017-02-13T12:36:50.000Z</updated>
+    <updated>2017-02-13T23:47:28.000Z</updated>
     
     <content type="html"><![CDATA[<p>个人总结的 Android 开发规范初稿，其中控件缩写及 Android 资源文件命名部分不是很确定，有待商榷。Java 部分编程风格请参考：<a href="http://www.hawstein.com/posts/google-java-style.html" target="_blank" rel="external">Google Java 命名规范</a>。</p>
 <p>2017-02-13 更新：2017年开春之际，诚意献上重磅大礼：阿里巴巴Java开发手册，首次公开阿里官方Java代码规范标准。这套Java统一规范标准将有助于提高行业编码规范化水平，帮助行业人员提高开发质量和效率、大大降低代码维护成本。<a href="https://yq.aliyun.com/attachment/download/?id=1170" target="_blank" rel="external">点此下载</a></p>
@@ -236,6 +236,10 @@
     
     </summary>
     
+      <category term="Android" scheme="http://www.littlejie.com/categories/Android/"/>
+    
+      <category term="Java" scheme="http://www.littlejie.com/categories/Android/Java/"/>
+    
     
       <category term="Android" scheme="http://www.littlejie.com/tags/Android/"/>
     
@@ -248,7 +252,7 @@
     <link href="http://www.littlejie.com/2016/10/01/Gradle-%E5%AE%9E%E7%8E%B0-Android-%E5%A4%9A%E6%B8%A0%E9%81%93%E5%AE%9A%E5%88%B6%E5%8C%96%E6%89%93%E5%8C%85/"/>
     <id>http://www.littlejie.com/2016/10/01/Gradle-实现-Android-多渠道定制化打包/</id>
     <published>2016-10-01T04:12:43.000Z</published>
-    <updated>2017-02-10T08:46:16.000Z</updated>
+    <updated>2017-02-13T23:47:40.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
@@ -375,6 +379,10 @@
 &lt;p&gt;最近在项目中遇到需要实现 Apk 多渠道、定制化打包， Google 、百度查找了一些资料，成功实现了上述功能，在此记录以备不时之需，温故而知新，可以为
     
     </summary>
+    
+      <category term="Android" scheme="http://www.littlejie.com/categories/Android/"/>
+    
+      <category term="Gradle" scheme="http://www.littlejie.com/categories/Android/Gradle/"/>
     
     
       <category term="Android" scheme="http://www.littlejie.com/tags/Android/"/>
