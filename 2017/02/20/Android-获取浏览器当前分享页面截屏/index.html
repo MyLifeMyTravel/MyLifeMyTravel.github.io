@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?da8b560613f099edf2026f081f8a793c"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android 获取浏览器当前分享页面截屏 | 厉圣杰的博客 | 啦啦啦，德玛西亚</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,浏览器">
+    <meta name="description" content="Android 获取浏览器当前分享页面的截屏
+版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：AndroidDemo/BrowserScreenShotActivity文中如有纰漏，欢迎大家留言指出。
+
+今天在项目中碰见这么一个需求：获取 Chrome 浏览器分享时，页面的截屏。静下来一想，既然是分享，那么肯定得通过 Intent 来传递数据，如果真的能获取到 Chrome">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 获取浏览器当前分享页面截屏">
+<meta property="og:url" content="http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/index.html">
+<meta property="og:site_name" content="厉圣杰的博客">
+<meta property="og:description" content="Android 获取浏览器当前分享页面的截屏
+版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：AndroidDemo/BrowserScreenShotActivity文中如有纰漏，欢迎大家留言指出。
+
+今天在项目中碰见这么一个需求：获取 Chrome 浏览器分享时，页面的截屏。静下来一想，既然是分享，那么肯定得通过 Intent 来传递数据，如果真的能获取到 Chrome">
+<meta property="og:image" content="http://odsdowehg.bkt.clouddn.com/屏幕快照">
+<meta property="og:image" content="http://odsdowehg.bkt.clouddn.com/屏幕快照">
+<meta property="og:image" content="http://odsdowehg.bkt.clouddn.com/屏幕快照">
+<meta property="og:image" content="http://odsdowehg.bkt.clouddn.com/screenshot.png">
+<meta property="og:updated_time" content="2017-02-20T11:49:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 获取浏览器当前分享页面截屏">
+<meta name="twitter:description" content="Android 获取浏览器当前分享页面的截屏
+版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：AndroidDemo/BrowserScreenShotActivity文中如有纰漏，欢迎大家留言指出。
+
+今天在项目中碰见这么一个需求：获取 Chrome 浏览器分享时，页面的截屏。静下来一想，既然是分享，那么肯定得通过 Intent 来传递数据，如果真的能获取到 Chrome">
+<meta name="twitter:image" content="http://odsdowehg.bkt.clouddn.com/屏幕快照">
+    
+        <link rel="alternative" href="/atom.xml" title="厉圣杰的博客" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.7">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">厉圣杰</h5>
+          <a href="mailto:1025263614@qq.com" title="1025263614@qq.com" class="mail">1025263614@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MyLifeMyTravel" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/2952381050/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android 获取浏览器当前分享页面截屏</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android 获取浏览器当前分享页面截屏</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-20T11:49:07.000Z" itemprop="datePublished" class="page-time">
+  2017-02-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <!-- <h4>TOC</h4> -->
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-获取浏览器当前分享页面的截屏"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android 获取浏览器当前分享页面的截屏</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android-获取浏览器当前分享页面截屏"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android 获取浏览器当前分享页面截屏</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年02月20日 19:49" datetime="2017-02-20T11:49:07.000Z"  itemprop="datePublished">2017-02-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Android-获取浏览器当前分享页面的截屏"><a href="#Android-获取浏览器当前分享页面的截屏" class="headerlink" title="Android 获取浏览器当前分享页面的截屏"></a>Android 获取浏览器当前分享页面的截屏</h1><blockquote>
+<p>版权声明：本文为博主原创文章，未经博主允许不得转载。<br>微博：<a href="http://weibo.com/2952381050/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" target="_blank" rel="external">厉圣杰</a><br>源码：<a href="https://github.com/MyLifeMyTravel/AndroidCore/blob/master/demo/src/main/java/com/littlejie/demo/modules/advance/BrowserScreenShotActivity.java" target="_blank" rel="external">AndroidDemo/BrowserScreenShotActivity</a><br><strong>文中如有纰漏，欢迎大家留言指出。</strong></p>
+</blockquote>
+<p>今天在项目中碰见这么一个需求：获取 Chrome 浏览器分享时，页面的截屏。静下来一想，既然是分享，那么肯定得通过 Intent 来传递数据，如果真的能获取到 Chrome 分享页面时的截屏，那么 Intent 的数据中，一定有 <code>.jpg</code> 或者 <code>.png</code> 结尾的数据。说干就干，Demo 写起来。</p>
+<p>首先，新建一个 <code>BrowserScreenShotActivity.java</code>，在 <code>AndroidManifest.xml</code> 注册一下 <code>&lt;intent-filter&gt;</code>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">          <span class="attr">package</span>=<span class="string">"com.littlejie.demo"</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 读写权限 --&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 用于读取浏览器分享时生成的屏幕截图 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.READ_EXTERNAL_STORAGE"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">".modules.DemoApplication"</span></div><div class="line">        <span class="attr">android:allowBackup</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_launcher"</span></div><div class="line">        <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></div><div class="line">        <span class="attr">android:supportsRtl</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">android:theme</span>=<span class="string">"@style/AppTheme"</span>&gt;</div><div class="line">        </div><div class="line">        <span class="comment">&lt;!-- some other thing --&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- 注册 Intent，用于接受浏览器分享 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">activity</span></span></div><div class="line">            <span class="attr">android:name</span>=<span class="string">".modules.advance.BrowserScreenShotActivity"</span></div><div class="line">            <span class="attr">android:launchMode</span>=<span class="string">"singleTask"</span>&gt;</div><div class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.SEND"</span>/&gt;</span></div><div class="line">                <span class="comment">&lt;!-- 发送多个数据 --&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.SEND_MULTIPLE"</span>/&gt;</span></div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span>/&gt;</span></div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:mimeType</span>=<span class="string">"*/*"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>接下去，在浏览器中随便打开一个页面，分享至 Demo，这里有个问题，就是：屏幕截图数据在 Intent 中对应的 Key 我们并不知道，那怎么办呢？打断点啊！</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/屏幕快照" alt="屏幕快照" title="">
+                </div>
+                <div class="image-caption">屏幕快照</div>
+            </figure>
+<p>通过断点查看 Intent 的数据结构，发现 Intent 中的 mMap 成员变量含有一个 Uri，格式如下：<code>content://com.android.chrome.FileProvider/BlockedFile_33215122012582</code>，一眼看去就猜测这个 Uri 是 Chrome 通过 ContentProvider 供其他程序调用的，虽然与一开始猜测<strong>有已 .jpg 和 .png 结尾的数据</strong>不太一致，但好歹是有所发现。</p>
+<p>恩，现在还有一个问题，那就是 <code>mMap.value[3]</code> 对应的 key 值是多少？在上述断点界面根本就差看不到，但是 Android Studio 是很强大的，只是你没发现而已，既然 mMap 是一个 Map，那么久能通过 <code>keySet()</code> 方法获取 Map 的 key。接下来就是 Android Studio 大展拳脚的时间。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/屏幕快照" alt="屏幕快照" title="">
+                </div>
+                <div class="image-caption">屏幕快照</div>
+            </figure>
+<p>如上图所示的，在 Debug 界面，点击最后一个图标:Evaluate Expression（快捷键：option + f8）。在弹出的对话框中输入如下内容，回车，你会发现 Map 的 key 都出来了：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/屏幕快照" alt="屏幕快照" title="">
+                </div>
+                <div class="image-caption">屏幕快照</div>
+            </figure></p>
+<p>通过与第一幅图对比，发现下标为3的值（share_screenshot_as_stream）为我们需要的 key。</p>
+<p>布局比较简单，这里就不贴了，简单截取 <code>BrowserSrceenShotActivity.java</code> 中的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">super</span>.onResume();</div><div class="line">   <span class="keyword">if</span> (getIntent() == <span class="keyword">null</span>) &#123;</div><div class="line">       <span class="keyword">return</span>;</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   Uri screenShot = getIntent().getExtras().getParcelable(<span class="string">"screen_shot_as_stream"</span>);</div><div class="line"></div><div class="line">   <span class="keyword">if</span> (screenShot == <span class="keyword">null</span>) &#123;</div><div class="line">       ToastUtil.showDefaultToast(<span class="string">"获取浏览器截屏失败~"</span>);</div><div class="line">       <span class="keyword">return</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">try</span> &#123;</div><div class="line">       <span class="comment">//通过 Uri 获取截屏图片的输入流</span></div><div class="line">       InputStream is = getContentResolver().openInputStream(screenShot);</div><div class="line">       mIvScreenShot.setImageBitmap(BitmapFactory.decodeStream(is));</div><div class="line">   &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">       e.printStackTrace();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/screenshot.png" alt="screenshot" title="">
+                </div>
+                <div class="image-caption">screenshot</div>
+            </figure></p>
+<p>对于获取 Chrome 浏览器分享页面的截屏就告一段落，闲着没事，自己又测试了几个浏览器，包括系统内置浏览器、QQ浏览器、UC浏览器、百度浏览器、火狐浏览器，发现每个浏览器的差异很大。</p>
+<ul>
+<li>系统浏览器、UC浏览器与 Chrome 相差不大，只是 key 变成了 <code>share_full_screen</code> 和 <code>file</code></li>
+<li>QQ浏览器的分享行为与分享文件很相似，其 key 为 <code>android.intent.extra.STREAM</code>(Intent.EXTRA_STREAM)。</li>
+<li>百度浏览器是个什么鬼就不知道了，默默的把应用图标给分享过来了</li>
+<li>火狐浏览器不支持分享页面截图</li>
+</ul>
+<p>恩，就这么多，获取浏览器分享页面截屏主要还是靠浏览器的支持，真的市面上这么多浏览器适配起来还真麻烦。这次主要对 Android Studio 强大的 Debug功能进行了学习。PS：Android Studio真是极其强大的工具，用好它事半功倍，唯一不足的就是太耗性能。</p>
+<p><a href="https://github.com/MyLifeMyTravel/AndroidCore/blob/master/demo/src/main/java/com/littlejie/demo/modules/advance/BrowserScreenShotActivity.java" target="_blank" rel="external">Demo 代码传送门</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-02-20T11:49:50.000Z" itemprop="dateUpdated">2017年2月20日 19:49</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2017/02/20/Android-获取浏览器当前分享页面截屏/" target="_blank" rel="external">http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/</a>
+    </div>
+    <footer>
+        <a href="http://www.littlejie.com">
+            <img src="/img/avatar.jpeg" alt="厉圣杰">
+            厉圣杰
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/浏览器/">浏览器</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/&title=《Android 获取浏览器当前分享页面截屏》 — 厉圣杰的博客&pic=http://www.littlejie.com/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/&title=《Android 获取浏览器当前分享页面截屏》 — 厉圣杰的博客&source=希望有一天我能够很坦然地说："让我来告诉你，在我眼中，这是一个怎样的世界。"" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 获取浏览器当前分享页面截屏》 — 厉圣杰的博客&url=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/&via=http://www.littlejie.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/13/Android-开发规范/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android 开发规范</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢老板~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpeg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpeg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>厉圣杰的博客 &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/&title=《Android 获取浏览器当前分享页面截屏》 — 厉圣杰的博客&pic=http://www.littlejie.com/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/&title=《Android 获取浏览器当前分享页面截屏》 — 厉圣杰的博客&source=希望有一天我能够很坦然地说："让我来告诉你，在我眼中，这是一个怎样的世界。"" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 获取浏览器当前分享页面截屏》 — 厉圣杰的博客&url=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/&via=http://www.littlejie.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.littlejie.com/2017/02/20/Android-获取浏览器当前分享页面截屏/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrElEQVR42u3aMY7jQAwEQP//07fpArceN8mhoaAcGbIsqSYQiea8XvHnX/z5ff7/389Xq55z7YOHh4d39dHzc95hzvc9Hz9/j5YADw8Pb42X3yZh5EXi/OjnI9GS4eHh4T2Ad6bm7W9yZtKy4+Hh4T2fl9y491o/4/Hw8PCextuIZZMSkoS2k3AEDw8Pb4NXjVyf8H1lvoeHh4d3dUPAuYXtrWteippPi4eHh7fA60UDedAwGaHlWw0+LDceHh7eVV7+h160Ogl5k9jiwzPj4eHhLfOSS/Ta6/z8yRaBD5M9PDw8vEu85NRq8aguXHWIVW7T8fDw8NZ4vbBgHv6ORv55YcDDw8O7yju/vudtdK/Jzq9c2FmGh4eHd5WXv2rzYVjyr/zXatyMh4eHt8FLIoNJ09zbiFBtowu1Dg8PD2/M6w2ZehtJe8168q8PhQQPDw9vmXe+6DxKuDVIK2wjwMPDw1vgVZvdXhOcF4Bb8QQeHh7eBq/a8vZezdUAd7K4f1Q8PDw8vAVeNYZIblANJiZTu7fXxMPDw/sKb/KKrz50fq/zkbfPhoeHh7fAmwcKk0esbkfIQ+TCLgY8PDy8Iq8aE1Sj3rzhzpcVDw8P7/m8pHj0YtbexqxCnIGHh4e3wMsj0Y3y0AsvqsuBh4eHt8ErvFgHkcT8XZ3fvZm14OHh4bV4+dhp0hzny9ErM3h4eHjf4VXLw3xAdfe+r+o+BTw8PLwxLB/n9xrfZEF7A7m3V8bDw8Nb4N0tHudINx+AJVe7XE7w8PDwiry8GNxdxV4cXC5FeHh4eGu8ZHI0uc13YojC1gE8PDy8L/LyX3vUSWt+oTDg4eHhLfPysVZ+JC9I5R24eHh4eFd5+dCrN9aajL6qz4CHh4e3zbsVuU7ijF4huQDDw8PDq/F+AHrgSX5cJVjqAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.7"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.7" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
