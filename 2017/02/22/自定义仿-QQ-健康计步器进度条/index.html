@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?da8b560613f099edf2026f081f8a793c"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>自定义仿 QQ 健康计步器进度条 | 厉圣杰的博客 | 啦啦啦，德玛西亚</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,自定义View,进度条">
+    <meta name="description" content="自定义仿 QQ 健康计步器进度条
+版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：CircleProgress文中如有纰漏，欢迎大家留言指出。
+
+闲着没事，趁上班时间偷偷撸了一个圆形进度条，可以实现仿 QQ 健康计步器的圆形进度条，虽然网上这类控件很多，但毕竟是别人写的代码，总没自己写的用起来爽，所以还是选择再造一次轮子。该控件基本满足日常需求，但不支持设置圆弧半径，半径由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义仿 QQ 健康计步器进度条">
+<meta property="og:url" content="http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/index.html">
+<meta property="og:site_name" content="厉圣杰的博客">
+<meta property="og:description" content="自定义仿 QQ 健康计步器进度条
+版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：CircleProgress文中如有纰漏，欢迎大家留言指出。
+
+闲着没事，趁上班时间偷偷撸了一个圆形进度条，可以实现仿 QQ 健康计步器的圆形进度条，虽然网上这类控件很多，但毕竟是别人写的代码，总没自己写的用起来爽，所以还是选择再造一次轮子。该控件基本满足日常需求，但不支持设置圆弧半径，半径由">
+<meta property="og:image" content="http://odsdowehg.bkt.clouddn.com/cap.gif">
+<meta property="og:updated_time" content="2017-02-22T10:18:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义仿 QQ 健康计步器进度条">
+<meta name="twitter:description" content="自定义仿 QQ 健康计步器进度条
+版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：CircleProgress文中如有纰漏，欢迎大家留言指出。
+
+闲着没事，趁上班时间偷偷撸了一个圆形进度条，可以实现仿 QQ 健康计步器的圆形进度条，虽然网上这类控件很多，但毕竟是别人写的代码，总没自己写的用起来爽，所以还是选择再造一次轮子。该控件基本满足日常需求，但不支持设置圆弧半径，半径由">
+<meta name="twitter:image" content="http://odsdowehg.bkt.clouddn.com/cap.gif">
+    
+        <link rel="alternative" href="/atom.xml" title="厉圣杰的博客" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.7">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">厉圣杰</h5>
+          <a href="mailto:1025263614@qq.com" title="1025263614@qq.com" class="mail">1025263614@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MyLifeMyTravel" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/2952381050/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">自定义仿 QQ 健康计步器进度条</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">自定义仿 QQ 健康计步器进度条</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-02-22T10:16:50.000Z" itemprop="datePublished" class="page-time">
+  2017-02-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <!-- <h4>TOC</h4> -->
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#自定义仿-QQ-健康计步器进度条"><span class="post-toc-number">1.</span> <span class="post-toc-text">自定义仿 QQ 健康计步器进度条</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#效果"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">效果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#XML-配置"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">XML 配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代码配置"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">代码配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后记"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">后记</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-自定义仿-QQ-健康计步器进度条"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">自定义仿 QQ 健康计步器进度条</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年02月22日 18:16" datetime="2017-02-22T10:16:50.000Z"  itemprop="datePublished">2017-02-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="自定义仿-QQ-健康计步器进度条"><a href="#自定义仿-QQ-健康计步器进度条" class="headerlink" title="自定义仿 QQ 健康计步器进度条"></a>自定义仿 QQ 健康计步器进度条</h1><blockquote>
+<p>版权声明：本文为博主原创文章，未经博主允许不得转载。<br>微博：<a href="http://weibo.com/2952381050/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" target="_blank" rel="external">厉圣杰</a><br>源码：<a href="https://github.com/MyLifeMyTravel/CircleProgress" target="_blank" rel="external">CircleProgress</a><br><strong>文中如有纰漏，欢迎大家留言指出。</strong></p>
+</blockquote>
+<p>闲着没事，趁上班时间偷偷撸了一个圆形进度条，可以实现仿 QQ 健康计步器的圆形进度条，虽然网上这类控件很多，但毕竟是别人写的代码，总没自己写的用起来爽，所以还是选择再造一次轮子。该控件基本满足日常需求，但不支持设置圆弧半径，半径由 View 自行计算得出。</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>首先上控件的效果图，没图说个屁啊，是不？<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/cap.gif" alt="cap" title="">
+                </div>
+                <div class="image-caption">cap</div>
+            </figure></p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>主要实现逻辑如下：</p>
+<ol>
+<li>文字定位及绘制</li>
+<li>圆弧的绘制及角度的计算</li>
+<li>圆弧颜色渐变</li>
+<li>动画效果的实现</li>
+</ol>
+<p>具体逻辑请见代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircleProgress</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = CircleProgress.class.getSimpleName();</div><div class="line">    <span class="keyword">private</span> Context mContext;</div><div class="line"></div><div class="line">    <span class="comment">//默认大小</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mDefaultSize;</div><div class="line">    <span class="comment">//是否开启抗锯齿</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> antiAlias;</div><div class="line">    <span class="comment">//绘制标题</span></div><div class="line">    <span class="keyword">private</span> TextPaint mHintPaint;</div><div class="line">    <span class="keyword">private</span> CharSequence mHint;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mHintColor;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mHintSize;</div><div class="line"></div><div class="line">    <span class="comment">//绘制单位</span></div><div class="line">    <span class="keyword">private</span> TextPaint mUnitPaint;</div><div class="line">    <span class="keyword">private</span> CharSequence mUnit;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mUnitColor;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mUnitSize;</div><div class="line"></div><div class="line">    <span class="comment">//绘制数值</span></div><div class="line">    <span class="keyword">private</span> TextPaint mValuePaint;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mValue;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mMaxValue;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mPrecision;</div><div class="line">    <span class="keyword">private</span> String mPrecisionFormat;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mValueColor;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mValueSize;</div><div class="line"></div><div class="line">    <span class="comment">//绘制圆弧</span></div><div class="line">    <span class="keyword">private</span> Paint mArcPaint;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mArcColor1, mArcColor2, mArcColor3;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mArcWidth;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mStartAngle, mSweepAngle;</div><div class="line">    <span class="keyword">private</span> RectF mRectF;</div><div class="line">    <span class="comment">//渐变</span></div><div class="line">    <span class="keyword">private</span> Matrix mRotateMatrix;</div><div class="line">    <span class="comment">//渐变的颜色是360度，如果只显示270，那么则会缺失部分颜色</span></div><div class="line">    <span class="keyword">private</span> SweepGradient mSweepGradient;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] mGradientColors = &#123;Color.GREEN, Color.YELLOW, Color.RED&#125;;</div><div class="line">    <span class="comment">//当前进度，[0.0f,1.0f]</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mPercent;</div><div class="line">    <span class="comment">//动画时间</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> mAnimTime;</div><div class="line">    <span class="comment">//属性动画</span></div><div class="line">    <span class="keyword">private</span> ValueAnimator mAnimator;</div><div class="line"></div><div class="line">    <span class="comment">//绘制背景圆弧</span></div><div class="line">    <span class="keyword">private</span> Paint mBgArcPaint;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mBgArcColor;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mBgArcWidth;</div><div class="line"></div><div class="line">    <span class="comment">//圆心坐标，半径</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mFloatX, mFloatY, mRadius;</div><div class="line">    <span class="comment">//在屏幕上的坐标</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] mLocationOnScreen = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CircleProgress</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        init(context, attrs);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        mContext = context;</div><div class="line">        mDefaultSize = MiscUtil.dipToPx(mContext, <span class="number">150</span>);</div><div class="line">        mAnimator = <span class="keyword">new</span> ValueAnimator();</div><div class="line">        getLocationOnScreen(mLocationOnScreen);</div><div class="line">        mRectF = <span class="keyword">new</span> RectF();</div><div class="line">        initAttrs(attrs);</div><div class="line">        initPaint();</div><div class="line">        setValue(mValue);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initAttrs</span><span class="params">(AttributeSet attrs)</span> </span>&#123;</div><div class="line">        TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.CircleProgressBar);</div><div class="line"></div><div class="line">        antiAlias = typedArray.getBoolean(R.styleable.CircleProgressBar_antiAlias, <span class="keyword">false</span>);</div><div class="line"></div><div class="line">        mHint = typedArray.getString(R.styleable.CircleProgressBar_hint);</div><div class="line">        mHintColor = typedArray.getColor(R.styleable.CircleProgressBar_hintColor, Color.BLACK);</div><div class="line">        mHintSize = typedArray.getDimension(R.styleable.CircleProgressBar_hintSize, <span class="number">15</span>);</div><div class="line"></div><div class="line">        mValue = typedArray.getFloat(R.styleable.CircleProgressBar_value, <span class="number">0</span>);</div><div class="line">        mMaxValue = typedArray.getFloat(R.styleable.CircleProgressBar_maxValue, <span class="number">0</span>);</div><div class="line">        <span class="comment">//内容数值精度格式</span></div><div class="line">        mPrecision = typedArray.getInt(R.styleable.CircleProgressBar_precision, <span class="number">0</span>);</div><div class="line">        mPrecisionFormat = getPrecisionFormat(mPrecision);</div><div class="line">        mValueColor = typedArray.getColor(R.styleable.CircleProgressBar_valueColor, Color.BLACK);</div><div class="line">        mValueSize = typedArray.getDimension(R.styleable.CircleProgressBar_valueSize, <span class="number">60</span>);</div><div class="line"></div><div class="line">        mUnit = typedArray.getString(R.styleable.CircleProgressBar_unit);</div><div class="line">        mUnitColor = typedArray.getColor(R.styleable.CircleProgressBar_unitColor, Color.BLACK);</div><div class="line">        mUnitSize = typedArray.getDimension(R.styleable.CircleProgressBar_unitSize, <span class="number">15</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 设置渐变色</span></div><div class="line">        mArcColor1 = typedArray.getColor(R.styleable.CircleProgressBar_arcColor1, Color.GREEN);</div><div class="line">        mArcColor2 = typedArray.getColor(R.styleable.CircleProgressBar_arcColor2, Color.YELLOW);</div><div class="line">        mArcColor3 = typedArray.getColor(R.styleable.CircleProgressBar_arcColor3, Color.RED);</div><div class="line">        mGradientColors = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;mArcColor1, mArcColor2, mArcColor3&#125;;</div><div class="line"></div><div class="line">        mArcWidth = typedArray.getDimension(R.styleable.CircleProgressBar_arcWidth, <span class="number">15</span>);</div><div class="line">        mStartAngle = typedArray.getFloat(R.styleable.CircleProgressBar_startAngle, <span class="number">270</span>);</div><div class="line">        mSweepAngle = typedArray.getFloat(R.styleable.CircleProgressBar_sweepAngle, <span class="number">360</span>);</div><div class="line"></div><div class="line">        mBgArcColor = typedArray.getColor(R.styleable.CircleProgressBar_bgArcColor, Color.WHITE);</div><div class="line">        mBgArcWidth = typedArray.getDimension(R.styleable.CircleProgressBar_bgArcWidth, <span class="number">15</span>);</div><div class="line"></div><div class="line">        <span class="comment">//mPercent = typedArray.getFloat(R.styleable.CircleProgressBar_percent, 0);</span></div><div class="line">        mAnimTime = typedArray.getInt(R.styleable.CircleProgressBar_animTime, <span class="number">1000</span>);</div><div class="line"></div><div class="line">        typedArray.recycle();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getPrecisionFormat</span><span class="params">(<span class="keyword">int</span> precision)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"%."</span> + precision + <span class="string">"f"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initPaint</span><span class="params">()</span> </span>&#123;</div><div class="line">        mHintPaint = <span class="keyword">new</span> TextPaint();</div><div class="line">        <span class="comment">// 设置抗锯齿,会消耗较大资源，绘制图形速度会变慢。</span></div><div class="line">        mHintPaint.setAntiAlias(antiAlias);</div><div class="line">        <span class="comment">// 设置绘制文字大小</span></div><div class="line">        mHintPaint.setTextSize(mHintSize);</div><div class="line">        <span class="comment">// 设置画笔颜色</span></div><div class="line">        mHintPaint.setColor(mHintColor);</div><div class="line">        <span class="comment">// 从中间向两边绘制，不需要再次计算文字</span></div><div class="line">        mHintPaint.setTextAlign(Paint.Align.CENTER);</div><div class="line"></div><div class="line">        mValuePaint = <span class="keyword">new</span> TextPaint();</div><div class="line">        mValuePaint.setAntiAlias(antiAlias);</div><div class="line">        mValuePaint.setTextSize(mValueSize);</div><div class="line">        mValuePaint.setColor(mValueColor);</div><div class="line">        <span class="comment">// 设置Typeface对象，即字体风格，包括粗体，斜体以及衬线体，非衬线体等</span></div><div class="line">        mValuePaint.setTypeface(Typeface.DEFAULT_BOLD);</div><div class="line">        mValuePaint.setTextAlign(Paint.Align.CENTER);</div><div class="line"></div><div class="line">        mUnitPaint = <span class="keyword">new</span> TextPaint();</div><div class="line">        mUnitPaint.setAntiAlias(antiAlias);</div><div class="line">        mUnitPaint.setTextSize(mUnitSize);</div><div class="line">        mUnitPaint.setColor(mUnitColor);</div><div class="line">        mUnitPaint.setTextAlign(Paint.Align.CENTER);</div><div class="line"></div><div class="line">        mArcPaint = <span class="keyword">new</span> Paint();</div><div class="line">        mArcPaint.setAntiAlias(antiAlias);</div><div class="line">        mArcPaint.setColor(mArcColor1);</div><div class="line">        <span class="comment">// 设置画笔的样式，为FILL，FILL_OR_STROKE，或STROKE</span></div><div class="line">        mArcPaint.setStyle(Paint.Style.STROKE);</div><div class="line">        <span class="comment">// 设置画笔粗细</span></div><div class="line">        mArcPaint.setStrokeWidth(mArcWidth);</div><div class="line">        <span class="comment">// 当画笔样式为STROKE或FILL_OR_STROKE时，设置笔刷的图形样式，如圆形样式</span></div><div class="line">        <span class="comment">// Cap.ROUND,或方形样式 Cap.SQUARE</span></div><div class="line">        mArcPaint.setStrokeCap(Paint.Cap.ROUND);</div><div class="line">        mRotateMatrix = <span class="keyword">new</span> Matrix();</div><div class="line"></div><div class="line">        mBgArcPaint = <span class="keyword">new</span> Paint();</div><div class="line">        mBgArcPaint.setAntiAlias(antiAlias);</div><div class="line">        mBgArcPaint.setColor(mBgArcColor);</div><div class="line">        mBgArcPaint.setStyle(Paint.Style.STROKE);</div><div class="line">        mBgArcPaint.setStrokeWidth(mBgArcWidth);</div><div class="line">        mBgArcPaint.setStrokeCap(Paint.Cap.ROUND);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">        <span class="comment">//设置默认内边距，防止圆弧与边界重叠</span></div><div class="line">        <span class="keyword">int</span> padding = MiscUtil.dipToPx(mContext, <span class="number">5</span>);</div><div class="line">        setPadding(padding, padding, padding, padding);</div><div class="line">        <span class="comment">//因为是画圆，所以宽高相等</span></div><div class="line">        <span class="keyword">int</span> measuredWidth = MiscUtil.measure(widthMeasureSpec, mDefaultSize);</div><div class="line">        <span class="keyword">int</span> measuredHeight = MiscUtil.measure(heightMeasureSpec, mDefaultSize);</div><div class="line">        <span class="comment">//求最小值作为实际值</span></div><div class="line">        <span class="keyword">int</span> size = Math.min(measuredWidth, measuredHeight);</div><div class="line">        setMeasuredDimension(measuredWidth + getPaddingLeft() + getPaddingRight(),</div><div class="line">                measuredHeight + getPaddingTop() + getPaddingBottom());</div><div class="line">        <span class="comment">//获取圆的相关参数</span></div><div class="line">        mFloatX = mLocationOnScreen[<span class="number">0</span>] + size / <span class="number">2</span> + getPaddingLeft();</div><div class="line">        mFloatY = mLocationOnScreen[<span class="number">1</span>] + size / <span class="number">2</span> + getPaddingTop();</div><div class="line">        <span class="comment">//求圆弧和背景圆弧的最大宽度</span></div><div class="line">        <span class="keyword">float</span> maxArcWidth = Math.max(mArcWidth, mBgArcWidth);</div><div class="line">        <span class="comment">//减去圆弧的宽度，否则会造成部分圆弧绘制在外围，通过clipPadding属性可以解决</span></div><div class="line">        mRadius = size / <span class="number">2</span> - maxArcWidth;</div><div class="line">        <span class="comment">//绘制圆弧的边界</span></div><div class="line">        mRectF.left = mLocationOnScreen[<span class="number">0</span>] + getPaddingLeft();</div><div class="line">        mRectF.top = mLocationOnScreen[<span class="number">1</span>] + getPaddingTop();</div><div class="line">        mRectF.right = mRectF.left + size;</div><div class="line">        mRectF.bottom = mRectF.top + size;</div><div class="line">        updateArcPaint();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">        drawText(canvas);</div><div class="line">        drawArc(canvas);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 绘制内容文字</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> canvas</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawText</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        <span class="comment">// 计算文字宽度，由于Paint已设置为居中绘制，故此处不需要重新计算</span></div><div class="line">        <span class="comment">// float textWidth = mValuePaint.measureText(mValue.toString());</span></div><div class="line">        <span class="comment">// float x = mFloatX - textWidth / 2;</span></div><div class="line">        <span class="keyword">float</span> y = mFloatY - (mValuePaint.descent() + mValuePaint.ascent()) / <span class="number">2</span>;</div><div class="line">        canvas.drawText(String.format(mPrecisionFormat, mValue), mFloatX, y, mValuePaint);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (mHint != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">float</span> hy = mFloatY * <span class="number">2</span> / <span class="number">3</span> - (mHintPaint.descent() + mHintPaint.ascent()) / <span class="number">2</span>;</div><div class="line">            canvas.drawText(mHint.toString(), mFloatX, hy, mHintPaint);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (mUnit != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">float</span> uy = mFloatY * <span class="number">4</span> / <span class="number">3</span> - (mUnitPaint.descent() + mUnitPaint.ascent()) / <span class="number">2</span>;</div><div class="line">            canvas.drawText(mUnit.toString(), mFloatX, uy, mUnitPaint);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">drawArc</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        <span class="comment">// 绘制背景圆弧</span></div><div class="line">        <span class="comment">// 从进度圆弧结束的地方开始重新绘制，优化性能</span></div><div class="line">        <span class="keyword">float</span> currentAngle = mSweepAngle * mPercent;</div><div class="line">        canvas.drawArc(mRectF, mStartAngle, mSweepAngle, <span class="keyword">false</span>, mBgArcPaint);</div><div class="line">        <span class="comment">// 第一个参数 oval 为 RectF 类型，即圆弧显示区域</span></div><div class="line">        <span class="comment">// startAngle 和 sweepAngle  均为 float 类型，分别表示圆弧起始角度和圆弧度数</span></div><div class="line">        <span class="comment">// 3点钟方向为0度，顺时针递增</span></div><div class="line">        <span class="comment">// 如果 startAngle &lt; 0 或者 &gt; 360,则相当于 startAngle % 360</span></div><div class="line">        <span class="comment">// useCenter:如果为True时，在绘制圆弧时将圆心包括在内，通常用来绘制扇形</span></div><div class="line">        canvas.drawArc(mRectF, mStartAngle, currentAngle, <span class="keyword">false</span>, mArcPaint);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 更新圆弧画笔</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateArcPaint</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 设置渐变</span></div><div class="line">        mSweepGradient = <span class="keyword">new</span> SweepGradient(mFloatX, mFloatY, mGradientColors, <span class="keyword">null</span>);</div><div class="line">        <span class="comment">// 矩阵变化，-5是因为开始颜色可能会与结束颜色重叠</span></div><div class="line">        mRotateMatrix.setRotate(mStartAngle - <span class="number">5</span>, mFloatX, mFloatY);</div><div class="line">        mSweepGradient.setLocalMatrix(mRotateMatrix);</div><div class="line">        mArcPaint.setShader(mSweepGradient);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAntiAlias</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> antiAlias;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> CharSequence <span class="title">getHint</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mHint;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHint</span><span class="params">(CharSequence hint)</span> </span>&#123;</div><div class="line">        mHint = hint;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> CharSequence <span class="title">getUnit</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mUnit;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUnit</span><span class="params">(CharSequence unit)</span> </span>&#123;</div><div class="line">        mUnit = unit;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 设置当前值</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> value</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">float</span> value)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (value &gt; mMaxValue) &#123;</div><div class="line">            value = mMaxValue;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">float</span> start = mPercent;</div><div class="line">        <span class="keyword">float</span> end = value / mMaxValue;</div><div class="line">        startAnimator(start, end, mAnimTime);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startAnimator</span><span class="params">(<span class="keyword">float</span> start, <span class="keyword">float</span> end, <span class="keyword">long</span> animTime)</span> </span>&#123;</div><div class="line">        mAnimator.setDuration(animTime);</div><div class="line">        mAnimator = ValueAnimator.ofFloat(start, end);</div><div class="line">        mAnimator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span> </span>&#123;</div><div class="line">                mPercent = (<span class="keyword">float</span>) animation.getAnimatedValue();</div><div class="line">                mValue = mPercent * mMaxValue;</div><div class="line">                <span class="keyword">if</span> (BuildConfig.DEBUG) &#123;</div><div class="line">                    Log.d(TAG, <span class="string">"onAnimationUpdate: percent = "</span> + mPercent</div><div class="line">                            + <span class="string">";currentAngle = "</span> + (mSweepAngle * mPercent)</div><div class="line">                            + <span class="string">";value = "</span> + mValue);</div><div class="line">                &#125;</div><div class="line">                invalidate();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        mAnimator.start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取最大值</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getMaxValue</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mMaxValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 设置最大值</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> maxValue</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMaxValue</span><span class="params">(<span class="keyword">float</span> maxValue)</span> </span>&#123;</div><div class="line">        mMaxValue = maxValue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取精度</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPrecision</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mPrecision;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrecision</span><span class="params">(<span class="keyword">int</span> precision)</span> </span>&#123;</div><div class="line">        mPrecision = precision;</div><div class="line">        mPrecisionFormat = getPrecisionFormat(precision);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] getGradientColors() &#123;</div><div class="line">        <span class="keyword">return</span> mGradientColors;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 设置渐变</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> gradientColors</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGradientColors</span><span class="params">(<span class="keyword">int</span>[] gradientColors)</span> </span>&#123;</div><div class="line">        mGradientColors = gradientColors;</div><div class="line">        updateArcPaint();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getAnimTime</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mAnimTime;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAnimTime</span><span class="params">(<span class="keyword">long</span> animTime)</span> </span>&#123;</div><div class="line">        mAnimTime = animTime;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 重置</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">()</span> </span>&#123;</div><div class="line">        startAnimator(mPercent, <span class="number">0.0f</span>, <span class="number">1000L</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDetachedFromWindow</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDetachedFromWindow();</div><div class="line">        <span class="comment">//释放资源</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="XML-配置"><a href="#XML-配置" class="headerlink" title="XML 配置"></a>XML 配置</h2><p>通过 XML 可以配置出多种效果，支持配置属性如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">"CircleProgressBar"</span>&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 是否开启抗锯齿 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"antiAlias"</span> <span class="attr">format</span>=<span class="string">"boolean"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 绘制内容相应的提示语 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"hint"</span> <span class="attr">format</span>=<span class="string">"string|reference"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"hintSize"</span> <span class="attr">format</span>=<span class="string">"dimension"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"hintColor"</span> <span class="attr">format</span>=<span class="string">"color|reference"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 绘制内容的单位 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"unit"</span> <span class="attr">format</span>=<span class="string">"string|reference"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"unitSize"</span> <span class="attr">format</span>=<span class="string">"dimension"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"unitColor"</span> <span class="attr">format</span>=<span class="string">"color|reference"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 绘制内容的数值 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"maxValue"</span> <span class="attr">format</span>=<span class="string">"float"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"value"</span> <span class="attr">format</span>=<span class="string">"float"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 精度，默认为0 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"precision"</span> <span class="attr">format</span>=<span class="string">"integer"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"valueSize"</span> <span class="attr">format</span>=<span class="string">"dimension"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"valueColor"</span> <span class="attr">format</span>=<span class="string">"color|reference"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 圆弧颜色，设置多个可实现渐变 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"arcColor1"</span> <span class="attr">format</span>=<span class="string">"color|reference"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"arcColor2"</span> <span class="attr">format</span>=<span class="string">"color|reference"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"arcColor3"</span> <span class="attr">format</span>=<span class="string">"color|reference"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 圆弧宽度 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"arcWidth"</span> <span class="attr">format</span>=<span class="string">"dimension"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 圆弧起始角度，3点钟方向为0，顺时针递增，小于0或大于360进行取余 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"startAngle"</span> <span class="attr">format</span>=<span class="string">"float"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 圆弧度数 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"sweepAngle"</span> <span class="attr">format</span>=<span class="string">"float"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 当前进度百分比 --&gt;</span></div><div class="line">   <span class="comment">&lt;!--&lt;attr name="percent" format="float"/&gt;--&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 设置动画时间 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"animTime"</span> <span class="attr">format</span>=<span class="string">"integer"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 背景圆弧颜色 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"bgArcColor"</span> <span class="attr">format</span>=<span class="string">"color|reference"</span> /&gt;</span></div><div class="line">   <span class="comment">&lt;!-- 背景圆弧宽度 --&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"bgArcWidth"</span> <span class="attr">format</span>=<span class="string">"dimension"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="代码配置"><a href="#代码配置" class="headerlink" title="代码配置"></a>代码配置</h2><p>考虑到圆弧大小、圆弧起始角度等属性一般不可能动态改变，所以通过代码并不能设置 CircleProgress 的全部属性。具体支持方法可以查看 <code>CircleProgress.java</code> 中的 <code>setter</code> 方法。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>该控件还有许多值得改进的地方，如：对重绘的优化。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-02-22T10:18:05.000Z" itemprop="dateUpdated">2017年2月22日 18:18</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2017/02/22/自定义仿-QQ-健康计步器进度条/" target="_blank" rel="external">http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/</a>
+    </div>
+    <footer>
+        <a href="http://www.littlejie.com">
+            <img src="/img/avatar.jpeg" alt="厉圣杰">
+            厉圣杰
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/进度条/">进度条</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/&title=《自定义仿 QQ 健康计步器进度条》 — 厉圣杰的博客&pic=http://www.littlejie.com/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/&title=《自定义仿 QQ 健康计步器进度条》 — 厉圣杰的博客&source=希望有一天我能够很坦然地说："让我来告诉你，在我眼中，这是一个怎样的世界。"" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自定义仿 QQ 健康计步器进度条》 — 厉圣杰的博客&url=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/&via=http://www.littlejie.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/20/Android-获取浏览器当前分享页面截屏/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢老板~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpeg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpeg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>厉圣杰的博客 &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/&title=《自定义仿 QQ 健康计步器进度条》 — 厉圣杰的博客&pic=http://www.littlejie.com/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/&title=《自定义仿 QQ 健康计步器进度条》 — 厉圣杰的博客&source=希望有一天我能够很坦然地说："让我来告诉你，在我眼中，这是一个怎样的世界。"" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自定义仿 QQ 健康计步器进度条》 — 厉圣杰的博客&url=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/&via=http://www.littlejie.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.littlejie.com/2017/02/22/自定义仿-QQ-健康计步器进度条/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3aS27jQAwFQN//0g6Q1QSONI+ftrMorQzBklkKIHZe8/GIj+f38e/n1+P1m1fXJne+r2H5wMPDw2uVnhR9j0moeaH5g7iqDQ8PD+80L28GyY9tfSdvP5fn8fDw8D7KS17ZScupLqaTGvDw8PD+Mu/+zFWhCWBSDx4eHt77eb1wNlk0T6KEPBxZyFrw8PDwYl5vA+yzn4/v7+Hh4eG1dtV7L9z8qmr0UK4WDw8P7wAv35rqNY/qSNakGRT+Y8DDw8Mb8PKIofrDu0vkPOb4cQYPDw/vAK8Xid6HqvlYQC+MqJ7Bw8PDO8dLFse9mCAfHai2pWjhjoeHh3eAVw1YC8vZ1verD6K5MYaHh4fX4iWL5l6YmwcHE1g5xsXDw8Mb83otYR40TIYSHpMDDw8Pb8yrjkY9x0eOzAcRLs/g4eHhHeDlMUFz2z4oIo+Mk7c9Hh4e3jt58+KqQUY+jNVrJHh4eHgneL2i8+h2q53kIwK//MeAh4eHt8rLS5+EsJMttOqZX34RDw8P7xhv6zWdvMTz0vOrCvMReHh4eEu8fHmdJxzJIrg3klUIf/Hw8PBWeUlx1bIm4wLzx11+9nh4eHgtXj4slS+4e0vzvDFEfzY8PDy8Y7ytyHXyKq/GE1GdeHh4eAd4+dBAL+SdBMG9Ia3/xLh4eHh4Y14V1tv47wUfC48MDw8P7y28HFndrMrv03vQeHh4eO/hTbbnJ1f1hq6qzQkPDw/vBO9ZPLZe372WkGyzRX0PDw8Pb8DrdZLqD0xGu6r36TUSPDw8vCqvtzWVb+3nIex9uWujA3h4eHhLvOrydytgrbaKatPCw8PD+yxvK9jtPZre5hkeHh7eX+blAUGyBO/d4WBjwMPDw3vh9QKFE4vm3UU2Hh4e3gleLwudRLdzzHwwCw8PD6/F+wJiFjXKDoD6BQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.7"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.7" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
