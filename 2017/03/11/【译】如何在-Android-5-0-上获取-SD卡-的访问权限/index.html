@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?da8b560613f099edf2026f081f8a793c"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>【译】如何在 Android 5.0 上获取 SD卡 的访问权限 | 厉圣杰的博客 | 啦啦啦，德玛西亚</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,SD卡,存储">
+    <meta name="description" content="因为最近项目需要，涉及到 SD卡 的读写操作，然而申请 
+123&amp;lt;!-- 读写权限 --&amp;gt;&amp;lt;uses-permission android:name=&amp;quot;android.permission.READ_EXTERNAL_STORAGE&amp;quot;/&amp;gt;&amp;lt;uses-permission android:name=&amp;quot;android.permission.W">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【译】如何在 Android 5.0 上获取 SD卡 的访问权限">
+<meta property="og:url" content="http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/index.html">
+<meta property="og:site_name" content="厉圣杰的博客">
+<meta property="og:description" content="因为最近项目需要，涉及到 SD卡 的读写操作，然而申请 
+123&amp;lt;!-- 读写权限 --&amp;gt;&amp;lt;uses-permission android:name=&amp;quot;android.permission.READ_EXTERNAL_STORAGE&amp;quot;/&amp;gt;&amp;lt;uses-permission android:name=&amp;quot;android.permission.W">
+<meta property="og:updated_time" content="2017-03-11T00:53:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【译】如何在 Android 5.0 上获取 SD卡 的访问权限">
+<meta name="twitter:description" content="因为最近项目需要，涉及到 SD卡 的读写操作，然而申请 
+123&amp;lt;!-- 读写权限 --&amp;gt;&amp;lt;uses-permission android:name=&amp;quot;android.permission.READ_EXTERNAL_STORAGE&amp;quot;/&amp;gt;&amp;lt;uses-permission android:name=&amp;quot;android.permission.W">
+    
+        <link rel="alternative" href="/atom.xml" title="厉圣杰的博客" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.7">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">厉圣杰</h5>
+          <a href="mailto:1025263614@qq.com" title="1025263614@qq.com" class="mail">1025263614@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MyLifeMyTravel" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/2952381050/profile?topnav=1&wvr=6" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">【译】如何在 Android 5.0 上获取 SD卡 的访问权限</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">【译】如何在 Android 5.0 上获取 SD卡 的访问权限</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-11T00:53:21.000Z" itemprop="datePublished" class="page-time">
+  2017-03-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <!-- <h4>TOC</h4> -->
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问"><span class="post-toc-number">1.</span> <span class="post-toc-text">问</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#来自-Jeff-Sharkey-的回答"><span class="post-toc-number">2.</span> <span class="post-toc-text">来自 Jeff Sharkey 的回答</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何使用新的-API"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">如何使用新的 API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何检测是否对某个文件-文件夹有访问权限"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">如何检测是否对某个文件/文件夹有访问权限</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#能否在-Kitkat-中使用"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">能否在 Kitkat 中使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#能否知道有哪些-APP-拥有该权限"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">能否知道有哪些 APP 拥有该权限</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在多用户的设备上授权该如何处理？"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">在多用户的设备上授权该如何处理？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#授权是否可以被取消？"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">授权是否可以被取消？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对于文件夹授权是否是递归授权的？"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">对于文件夹授权是否是递归授权的？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#授权是否支持多选操作？"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">授权是否支持多选操作？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#是否可以在模拟器上尝试新-API"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">是否可以在模拟器上尝试新 API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#当用户替换-SD卡-时会发生什么？"><span class="post-toc-number">2.10.</span> <span class="post-toc-text">当用户替换 SD卡 时会发生什么？</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-【译】如何在-Android-5-0-上获取-SD卡-的访问权限"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">【译】如何在 Android 5.0 上获取 SD卡 的访问权限</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月11日 8:53" datetime="2017-03-11T00:53:21.000Z"  itemprop="datePublished">2017-03-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>因为最近项目需要，涉及到 SD卡 的读写操作，然而申请 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 读写权限 --&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;</div><div class="line">&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>权限只能对 SD卡 进行读操作，而没有写权限，也就是说，Android 在某个版本中对 SD卡 的读写权限进行了限制。后在 StackoverFlow 上找到一篇相关问答，解了心中疑惑。在此，对该问答进行翻译并附上相关 Demo，已做备忘。</p>
+<p>原文地址：<a href="http://stackoverflow.com/questions/26744842/how-to-use-the-new-sd-card-access-api-presented-for-android-5-0-lollipop" target="_blank" rel="external">How to use the new SD card access API presented for Android 5.0 (Lollipop)?</a></p>
+<h2 id="问"><a href="#问" class="headerlink" title="问"></a>问</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在 Android 4.4(KitKat) 中，Google 对 SD卡 的访问已经做了严格的限制。<br>在 Android 5.0(Lollipop) 中，开发者可以使用 新API 要求用户对某个指定的文件夹进行访问授权，详见：<a href="https://code.google.com/p/android/issues/detail?id=67570#c4444" target="_blank" rel="external">Android 4.4 Samsung Galaxy s4 external sd card is now read only, Remove or option to edit non app files.</a>(译者注：开头挺搞笑的，都是开发者吐槽 Google 对 SD卡 做了限制)</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>上述文章中有两个链接：</p>
+<ol>
+<li><p><a href="https://android.googlesource.com/platform/development/+/android-5.0.0_r2/samples/Vault/src/com/example/android/vault/VaultProvider.java#258" target="_blank" rel="external">https://android.googlesource.com/platform/development/+/android-5.0.0_r2/samples/Vault/src/com/example/android/vault/VaultProvider.java#258</a></p>
+<p> 此链接中代码看起来更像是内部示例(可能会在以后的 API Demo 中出现)，但是真的很难理解这部分代码的意图。</p>
+</li>
+<li><p><a href="http://developer.android.com/reference/android/support/v4/provider/DocumentFile.html" target="_blank" rel="external">http://developer.android.com/reference/android/support/v4/provider/DocumentFile.html</a></p>
+<p> 这是 新API 的官方文档，但是并没有多少如何使用的细节。(译者注：这份文档其实还是有很多内容的，后面会具体细讲。至于为什么会有这种差别，可能作者提问时，该文档尚未完善吧~)</p>
+<blockquote>
+<p>If you really do need full access to an entire subtree of documents, start by launching ACTION_OPEN_DOCUMENT_TREE to let the user pick a directory. Then pass the resulting getData() into fromTreeUri(Context, Uri) to start working with the user selected tree.<br>As you navigate the tree of DocumentFile instances, you can always use getUri() to obtain the Uri representing the underlying document for that object, for use with openInputStream(Uri), etc.<br>To simplify your code on devices running KITKAT or earlier, you can use fromFile(File) which emulates the behavior of a DocumentsProvider.</p>
+</blockquote>
+</li>
+</ol>
+<p>对于新 API 我有以下问题：</p>
+<ol>
+<li>新 API 的正确使用方式？</li>
+<li>根据文档，系统会记录 app 被授予访问权限的文件和文件夹。那么，我该如何检测我对某个文件或者文件夹是否有访问权限？是否有方法获取可访问的文件或文件夹列表呢？</li>
+<li>在 Android 4.4 上如何处理这个问题？Support Library 是否包含相应的解决方案</li>
+<li>系统中是否有对应的界面可以查看哪些 App 可以访问哪些文件。</li>
+<li>在多用户的设备上授权该如何处理？</li>
+<li>是否有其它关于新 API 的文档？</li>
+<li>对 SD卡 的授权是否可以被取消？如果是，那对应的意图是什么？</li>
+<li>对于文件夹授权是否是递归授权？指代文件夹内还嵌套有文件夹。</li>
+<li>SD 授权是否支持多选？或该应用程序需要专门告诉意图要允许的文件/文件夹吗？</li>
+<li>模拟器可以测试新 API 嘛？我的意思是，模拟器具有 SD 卡的分区，但它的作用是主要的外部存储，简单使用 <code>android.permission.WRITE_EXTERNAL_STORAGE</code> 是否足够？</li>
+<li>当用户替换 SD卡 是会发生什么？</li>
+</ol>
+<h2 id="来自-Jeff-Sharkey-的回答"><a href="#来自-Jeff-Sharkey-的回答" class="headerlink" title="来自 Jeff Sharkey 的回答"></a>来自 <a href="http://stackoverflow.com/users/256332/jeff-sharkey" target="_blank" rel="external">Jeff Sharkey</a> 的回答</h2><p>这些问题问的都非常好，让我们来深入挖掘下</p>
+<h3 id="如何使用新的-API"><a href="#如何使用新的-API" class="headerlink" title="如何使用新的 API"></a>如何使用新的 API</h3><p>在 Kitkat 中有一份非常好的关于与 <code>Storage Access Framework</code> 交互的文档：<a href="https://developer.android.com/guide/topics/providers/document-provider.html#client" target="_blank" rel="external">Document provider</a>.</p>
+<p>新 API 的使用与之很相似。通过发送以下 Intent ，让用户在文档树(<code>Directory Tree</code>)中选择授权目录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);</div><div class="line">startActivityForResult(intent, <span class="number">42</span>);</div></pre></td></tr></table></figure>
+<p>在 <code>onActivityResult()</code> 中，将用户选择的 Uri 传递给辅助类 <code>DocumentFile</code>。以下代码片段展示了如何列出选中目录下的文件和如何创建一个文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent resultData)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (resultCode == RESULT_OK) &#123;</div><div class="line">        Uri treeUri = resultData.getData();</div><div class="line">        DocumentFile pickedDir = DocumentFile.fromTreeUri(<span class="keyword">this</span>, treeUri);</div><div class="line"></div><div class="line">        <span class="comment">// List all existing files inside picked directory</span></div><div class="line">        <span class="keyword">for</span> (DocumentFile file : pickedDir.listFiles()) &#123;</div><div class="line">            Log.d(TAG, <span class="string">"Found file "</span> + file.getName() + <span class="string">" with size "</span> + file.length());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// Create a new file and write into it</span></div><div class="line">        DocumentFile newFile = pickedDir.createFile(<span class="string">"text/plain"</span>, <span class="string">"My Novel"</span>);</div><div class="line">        OutputStream out = getContentResolver().openOutputStream(newFile.getUri());</div><div class="line">        out.write(<span class="string">"A long time ago..."</span>.getBytes());</div><div class="line">        out.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由 <code>DocumentFile.getUri()</code> 返回的 Uri 使用非常灵活，可以与不同的 API 搭配使用。例如，你可以通过 <code>Inetnt.setData()</code> 将 Uri 分享出去，不过得将 Intent 的 flag 设置为 <code>Intent.FLAG_GRANT_READ_URI_PERMISSION</code>。</p>
+<h3 id="如何检测是否对某个文件-文件夹有访问权限"><a href="#如何检测是否对某个文件-文件夹有访问权限" class="headerlink" title="如何检测是否对某个文件/文件夹有访问权限"></a>如何检测是否对某个文件/文件夹有访问权限</h3><p>默认情况下，通过 <code>Storage Access Framework</code> 获取的 Uri 授权并不是永久的，设备重启后就会消失。不过，系统提供了相关的接口让授权永久化，如果需要的话可自行设置。在上述代码，你可以如此设置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">getContentResolver().takePersistableUriPermission(treeUri,</div><div class="line">            Intent.FLAG_GRANT_READ_URI_PERMISSION |</div><div class="line">            Intent.FLAG_GRANT_WRITE_URI_PERMISSION);</div></pre></td></tr></table></figure>
+<p>之后，你就可以通过 <code>ContentResolver.getPersistedUriPermissions()</code> 来获取 APP 已经被永久授予权限的 Uri。如果不在需要某个 Uri 的权限，可以通过 <code>ContentResolver.releasePersistableUriPermission()</code> 来释放。</p>
+<h3 id="能否在-Kitkat-中使用"><a href="#能否在-Kitkat-中使用" class="headerlink" title="能否在 Kitkat 中使用"></a>能否在 Kitkat 中使用</h3><p>不能，因为该 API 是在 Lollipop 中添加的</p>
+<h3 id="能否知道有哪些-APP-拥有该权限"><a href="#能否知道有哪些-APP-拥有该权限" class="headerlink" title="能否知道有哪些 APP 拥有该权限"></a>能否知道有哪些 APP 拥有该权限</h3><p>能。但是目前是没有 UI 界面的，你得通过 <code>adb shell dumpsys activity providers</code> 来获取。</p>
+<h3 id="在多用户的设备上授权该如何处理？"><a href="#在多用户的设备上授权该如何处理？" class="headerlink" title="在多用户的设备上授权该如何处理？"></a>在多用户的设备上授权该如何处理？</h3><p>与多用户系统的其它功能一样，Uri 授权也是用户独立的。因此，同一个 APP 的 Uri 授权对每个用户是透明的。</p>
+<h3 id="授权是否可以被取消？"><a href="#授权是否可以被取消？" class="headerlink" title="授权是否可以被取消？"></a>授权是否可以被取消？</h3><p>DocumentProvider 支持随时撤销授权。取消授权最常见的方法就是通过上面提到 <code>ContentResolver.releasePersistableUriPermission()</code> 。</p>
+<p>当清除应用的数据时，应用相关的授权也都会被清除。</p>
+<h3 id="对于文件夹授权是否是递归授权的？"><a href="#对于文件夹授权是否是递归授权的？" class="headerlink" title="对于文件夹授权是否是递归授权的？"></a>对于文件夹授权是否是递归授权的？</h3><p>是的，通过 <code>ACTION_OPEN_DOCUMENT_TREE</code> 的 Intent 获取到授权之后，对该 Uri 下的所有文件都有读写权限。</p>
+<h3 id="授权是否支持多选操作？"><a href="#授权是否支持多选操作？" class="headerlink" title="授权是否支持多选操作？"></a>授权是否支持多选操作？</h3><p>从 Android 4.4(Kitkat) 起就支持了。您可以在启动 <code>ACTION_OPEN_DOCUMENT</code> Intent 时通过设置 <code>EXTRA_ALLOW_MULTIPLE</code> 来实现。您可以通过使用 <code>Intent.setType()</code> 或者 <code>EXTRA_MIME_TYPES</code> 来设置可选文件类型。具体参考：<a href="http://developer.android.com/reference/android/content/Intent.html#ACTION_OPEN_DOCUMENT" target="_blank" rel="external">ACTION_OPEN_DOCUMENT</a></p>
+<h3 id="是否可以在模拟器上尝试新-API"><a href="#是否可以在模拟器上尝试新-API" class="headerlink" title="是否可以在模拟器上尝试新 API"></a>是否可以在模拟器上尝试新 API</h3><p>可以的。如果你的 APP 只使用 <code>Storage Access Framework</code> 访问共享存储，你甚至不再需要 <code>READ/WRITE_EXTERNAL_STORAGE</code> 权限或者使用 <code>android:maxSdkVersion</code> 在较旧的版本上使用它们。</p>
+<h3 id="当用户替换-SD卡-时会发生什么？"><a href="#当用户替换-SD卡-时会发生什么？" class="headerlink" title="当用户替换 SD卡 时会发生什么？"></a>当用户替换 SD卡 时会发生什么？</h3><p>当涉及物理介质时，底层媒体的 UUID（例如FAT序列号）总是被烧录到返回的 Uri 中。The system uses this to connect you to the media that the user originally selected, even if the user swaps the media around between multiple slots.(翻译不了)</p>
+<p>如果用户替换了新的 SD卡，您需要重新申请 SD卡 授权。 由于系统会记住基于每个UUID的授权，如果用户以后重新插入，您将继续先前授予对原始卡的访问权限。</p>
+<p>参考：<a href="http://en.wikipedia.org/wiki/Volume_serial_number" target="_blank" rel="external">磁盘序列号</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-03-11T00:53:58.000Z" itemprop="dateUpdated">2017年3月11日 8:53</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/" target="_blank" rel="external">http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/</a>
+    </div>
+    <footer>
+        <a href="http://www.littlejie.com">
+            <img src="/img/avatar.jpeg" alt="厉圣杰">
+            厉圣杰
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SD卡/">SD卡</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/存储/">存储</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/&title=《【译】如何在 Android 5.0 上获取 SD卡 的访问权限》 — 厉圣杰的博客&pic=http://www.littlejie.com/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/&title=《【译】如何在 Android 5.0 上获取 SD卡 的访问权限》 — 厉圣杰的博客&source=希望有一天我能够很坦然地说："让我来告诉你，在我眼中，这是一个怎样的世界。"" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【译】如何在 Android 5.0 上获取 SD卡 的访问权限》 — 厉圣杰的博客&url=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/&via=http://www.littlejie.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/02/Android-自定义View之圆形进度条总结/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android 自定义View之圆形进度条总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢老板~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpeg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpeg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>厉圣杰的博客 &copy; 2015 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/&title=《【译】如何在 Android 5.0 上获取 SD卡 的访问权限》 — 厉圣杰的博客&pic=http://www.littlejie.com/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/&title=《【译】如何在 Android 5.0 上获取 SD卡 的访问权限》 — 厉圣杰的博客&source=希望有一天我能够很坦然地说："让我来告诉你，在我眼中，这是一个怎样的世界。"" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《【译】如何在 Android 5.0 上获取 SD卡 的访问权限》 — 厉圣杰的博客&url=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/&via=http://www.littlejie.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.littlejie.com/2017/03/11/【译】如何在-Android-5-0-上获取-SD卡-的访问权限/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJElEQVR42u3aQW4jMQwEQP//0841QOCkm5wAHrnmFCTekUo+9JLU4xE/z2/Pz9/8/rz6/PffJ6vP/rp6sLGxsW/Cbjc9O5qfW9wfVvtlYGNjY5/N/j0YohfF1Pyd+dHkFmxsbGzsPKKS5dsoyo8YGxsbGzvfxKx0aeMnD0VsbGzsz2Rf9d/99jiSt81WvKyXho2Njf327Hwq+v4//8t8GxsbG/uN2c/FkzeGkqZSHloX7BwbGxv7IHZeHuQNo+STbfzkR18UJNjY2NhHsPchkbeBZsPa2c9/HCU2Njb2Qex9OLU9nJzaBtVqvo2NjY19EDsPuTao2pBLSqPNyBkbGxv7VPasVTRr+uQH3fbJopEwNjY29hHsdrttgLUFxiyW8pjExsbGPo89u9R42cLxbzZXfF7+FRsbG/s4dhI8s/HwJvyKdn/7RWJjY2N/DHvW9M8Bsys4+yYXNjY29knsdustL28zzZpQuQIbGxv7VHYSGJthbdtUaoOtbYRhY2Njn8pOQiIH/I75j8FAO+TAxsbGPoN91dWZ9ijbZlZ+fFExg42NjX0Qu236zOInHxu3RdEsJrGxsbHPY+cf3Swzu/qzaS3VcYiNjY19c3a+TF7GtOG3j6u6XYWNjY19ELstJ2aB136yPYjZ1U9sbGzs+7LbSzBtu/8RP7Mhbt4ae7SbxsbGxr4V+6piIxkDbEa/bUPq5duwsbGxD2Jv4iQPjKuu6eRfSb4WNjY29t3Z+4uP+ZJtzOQXfeqyBBsbG/s49n7Qm1++2Zcf7VFePNPGxsbGfjN2C5ttLhnK7i/u1IeFjY2NfQQ7bwm1Lft8MDCLq1kBEy2MjY2NfSt2e1lnA04KklmwzUogbGxs7DPYz/LJW/z7A20HyXlMYmNjY5/EbsNgEzPtgbZXc2blEDY2NvYZ7LxBk59cHmazMW0bk4/Z94CNjY19K3b76iQD86ZS0QOLL4b+sVtsbGzsj2S3C28Gve2VnfwN2NjY2J/MzqNoU0gkhco+JrGxsbHPY88uMuYhtx8G57EXHQE2Njb2Qey8nNiH0z7S2q1v/i02Njb227O/ABHW/WGilClQAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.7"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.7" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
