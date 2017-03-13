@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.littlejie.com/"/>
-  <updated>2017-03-11T00:53:58.000Z</updated>
+  <updated>2017-03-13T04:58:58.000Z</updated>
   <id>http://www.littlejie.com/</id>
   
   <author>
@@ -14,6 +14,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于Material Design的Gank IO客户端</title>
+    <link href="http://www.littlejie.com/2017/03/13/%E5%9F%BA%E4%BA%8EMaterial-Design%E7%9A%84Gank-IO%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
+    <id>http://www.littlejie.com/2017/03/13/基于Material-Design的Gank-IO客户端/</id>
+    <published>2017-03-13T04:58:03.000Z</published>
+    <updated>2017-03-13T04:58:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>版权声明：本文为博主原创文章，未经博主允许不得转载。<br>微博：<a href="http://weibo.com/2952381050/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" target="_blank" rel="external">厉圣杰</a><br>源码：<a href="https://github.com/MyLifeMyTravel/GankIO" target="_blank" rel="external">GankIO</a><br><strong>文中如有纰漏，欢迎大家留言指出。</strong></p>
+</blockquote>
+<p>据说去年 RxJava + Retrofit 很火，但是自己一直没有接触，周末闲来无事，使用 MVP + RxJava + Retrofit + ButterKnife 写了一个简单的基于 <a href="http://gank.io/" target="_blank" rel="external">GankIO</a> 提供的 API 的 Material Design 的客户端。</p>
+<p>先上个效果图：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/gank.gif" alt="gank" title="">
+                </div>
+                <div class="image-caption">gank</div>
+            </figure></p>
+<p>简单说下项目架构，项目分为 <strong>core</strong> 和 <strong>app</strong> 两个 module。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/屏幕快照" alt="屏幕快照" title="">
+                </div>
+                <div class="image-caption">屏幕快照</div>
+            </figure>
+<p><strong>core</strong> 是无业务逻辑无关的库，包含一些基类，如：<code>BaseActivity</code>、<code>BaseFragment</code>等，这里封装好了 ButterKnife ，使用注解真的可以极大的加快开发效率。<br><code>BaseImage</code> 是临时封装 <code>ImageView</code> 和 <code>Glide</code> 的，封装的很差，待改进。</p>
+<p><strong>app</strong> 是基于 GankIO 的客户端，设计到具体的业务逻辑，其项目结构大致如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://odsdowehg.bkt.clouddn.com/屏幕快照" alt="屏幕快照" title="">
+                </div>
+                <div class="image-caption">屏幕快照</div>
+            </figure><br>其中，<code>modules</code> 包下是客户端的界面，由于界面不多，所以没有细分，<code>contract</code> 是 MVP 模式的契约类，具体可以参考 Google 开源的 MVP 项目：<a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">android-architecture</a>。<code>presenter</code> 包下则是 P 层的实现，只涉及业务、数据，不涉及 UI ，UI 的操作全部封装在 V 层。</p>
+<p>如果对 MVP 模式不是很理解，可以切换到 <code>master</code> 分支，<code>master</code> 分支使用传统的 Android 架构开发。</p>
+<h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ol>
+<li>SwipeRefreshLayout 与 WebView 的滑动冲突</li>
+<li>ViewPager 的状态保存</li>
+</ol>
+<p>项目写的比较匆忙，如有问题欢迎指出~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;版权声明：本文为博主原创文章，未经博主允许不得转载。&lt;br&gt;微博：&lt;a href=&quot;http://weibo.com/2952381050/profile?rightmod=1&amp;amp;wvr=6&amp;amp;mod=personinfo&quot; targe
+    
+    </summary>
+    
+      <category term="Android" scheme="http://www.littlejie.com/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://www.littlejie.com/tags/Android/"/>
+    
+      <category term="Material Design" scheme="http://www.littlejie.com/tags/Material-Design/"/>
+    
+      <category term="RxJava" scheme="http://www.littlejie.com/tags/RxJava/"/>
+    
+      <category term="Retrofit" scheme="http://www.littlejie.com/tags/Retrofit/"/>
+    
+      <category term="ButterKnife" scheme="http://www.littlejie.com/tags/ButterKnife/"/>
+    
+      <category term="MVP" scheme="http://www.littlejie.com/tags/MVP/"/>
+    
+  </entry>
   
   <entry>
     <title>【译】如何在 Android 5.0 上获取 SD卡 的访问权限</title>
