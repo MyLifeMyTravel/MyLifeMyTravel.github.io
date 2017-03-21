@@ -25,28 +25,28 @@
     
     
     <meta name="keywords" content="Android,Material Design,RxJava,Retrofit,ButterKnife,MVP">
-    <meta name="description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：GankIO文中如有纰漏，欢迎大家留言指出。
+    <meta name="description" content="基于 Material Design 的 Gank IO 客户端
+版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：GankIO文中如有纰漏，欢迎大家留言指出。
 
-据说去年 RxJava + Retrofit 很火，但是自己一直没有接触，周末闲来无事，使用 MVP + RxJava + Retrofit + ButterKnife 写了一个简单的基于 GankIO 提供的 API 的 Material Design 的客户端。
-先上个效果图">
+据说去年 RxJava + Retrofit 很火，但是自己一直没有接触，周末闲来无事，使用 MVP + RxJava + Retrofit + ButterKnife 写了一个简单的基于 GankIO 提供的 AP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Material Design的Gank IO客户端">
 <meta property="og:url" content="http://www.littlejie.com/2017/03/13/基于Material-Design的Gank-IO客户端/index.html">
 <meta property="og:site_name" content="厉圣杰的博客">
-<meta property="og:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：GankIO文中如有纰漏，欢迎大家留言指出。
+<meta property="og:description" content="基于 Material Design 的 Gank IO 客户端
+版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：GankIO文中如有纰漏，欢迎大家留言指出。
 
-据说去年 RxJava + Retrofit 很火，但是自己一直没有接触，周末闲来无事，使用 MVP + RxJava + Retrofit + ButterKnife 写了一个简单的基于 GankIO 提供的 API 的 Material Design 的客户端。
-先上个效果图">
+据说去年 RxJava + Retrofit 很火，但是自己一直没有接触，周末闲来无事，使用 MVP + RxJava + Retrofit + ButterKnife 写了一个简单的基于 GankIO 提供的 AP">
 <meta property="og:image" content="http://odsdowehg.bkt.clouddn.com/gank.gif">
+<meta property="og:image" content="http://odsdowehg.bkt.clouddn.com/14897464746139.jpg">
 <meta property="og:image" content="http://odsdowehg.bkt.clouddn.com/屏幕快照">
-<meta property="og:image" content="http://odsdowehg.bkt.clouddn.com/屏幕快照">
-<meta property="og:updated_time" content="2017-03-13T04:58:58.000Z">
+<meta property="og:updated_time" content="2017-03-21T15:16:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Material Design的Gank IO客户端">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：GankIO文中如有纰漏，欢迎大家留言指出。
+<meta name="twitter:description" content="基于 Material Design 的 Gank IO 客户端
+版权声明：本文为博主原创文章，未经博主允许不得转载。微博：厉圣杰源码：GankIO文中如有纰漏，欢迎大家留言指出。
 
-据说去年 RxJava + Retrofit 很火，但是自己一直没有接触，周末闲来无事，使用 MVP + RxJava + Retrofit + ButterKnife 写了一个简单的基于 GankIO 提供的 API 的 Material Design 的客户端。
-先上个效果图">
+据说去年 RxJava + Retrofit 很火，但是自己一直没有接触，周末闲来无事，使用 MVP + RxJava + Retrofit + ButterKnife 写了一个简单的基于 GankIO 提供的 AP">
 <meta name="twitter:image" content="http://odsdowehg.bkt.clouddn.com/gank.gif">
     
         <link rel="alternative" href="/atom.xml" title="厉圣杰的博客" type="application/atom+xml">
@@ -177,7 +177,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <!-- <h4>TOC</h4> -->
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#存在的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">存在的问题</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#基于-Material-Design-的-Gank-IO-客户端"><span class="post-toc-number">1.</span> <span class="post-toc-text">基于 Material Design 的 Gank IO 客户端</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目架构"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">项目架构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目中碰到的问题小记"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">项目中碰到的问题小记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SwipeRefreshLayout-与-WebView-的滑动冲突"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">SwipeRefreshLayout 与 WebView 的滑动冲突</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#WebView-页面自适应"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">WebView 页面自适应</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ViewPager-TabLayout-Fragment的状态保存"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">ViewPager + TabLayout + Fragment的状态保存</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -204,10 +204,10 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <blockquote>
+            <h1 id="基于-Material-Design-的-Gank-IO-客户端"><a href="#基于-Material-Design-的-Gank-IO-客户端" class="headerlink" title="基于 Material Design 的 Gank IO 客户端"></a>基于 Material Design 的 Gank IO 客户端</h1><blockquote>
 <p>版权声明：本文为博主原创文章，未经博主允许不得转载。<br>微博：<a href="http://weibo.com/2952381050/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" target="_blank" rel="external">厉圣杰</a><br>源码：<a href="https://github.com/MyLifeMyTravel/GankIO" target="_blank" rel="external">GankIO</a><br><strong>文中如有纰漏，欢迎大家留言指出。</strong></p>
 </blockquote>
-<p>据说去年 RxJava + Retrofit 很火，但是自己一直没有接触，周末闲来无事，使用 MVP + RxJava + Retrofit + ButterKnife 写了一个简单的基于 <a href="http://gank.io/" target="_blank" rel="external">GankIO</a> 提供的 API 的 Material Design 的客户端。</p>
+<p>据说去年 RxJava + Retrofit 很火，但是自己一直没有接触，周末闲来无事，使用 MVP + RxJava + Retrofit + ButterKnife 写了一个简单的基于 <a href="http://gank.io/" target="_blank" rel="external">GankIO</a> 提供的 API 的 Material Design 的客户端。不过，不得不自己吐槽一下，每日精选自己设计的真的很丑，特别是显示日期的 Item。</p>
 <p>先上个效果图：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -215,28 +215,34 @@
                 </div>
                 <div class="image-caption">gank</div>
             </figure></p>
-<p>简单说下项目架构，项目分为 <strong>core</strong> 和 <strong>app</strong> 两个 module。</p>
+<h2 id="项目架构"><a href="#项目架构" class="headerlink" title="项目架构"></a>项目架构</h2><p>简单说下项目架构，项目分为 <strong>app</strong> 、 <strong>core</strong> 和 <strong>library</strong> 三个 module。其中，<strong>library</strong> 是第三方的下拉刷新库，可以先忽略。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://odsdowehg.bkt.clouddn.com/屏幕快照" alt="屏幕快照" title="">
+                    <img src="http://odsdowehg.bkt.clouddn.com/14897464746139.jpg" alt="w300" title="">
                 </div>
-                <div class="image-caption">屏幕快照</div>
+                <div class="image-caption">w300</div>
             </figure>
-<p><strong>core</strong> 是无业务逻辑无关的库，包含一些基类，如：<code>BaseActivity</code>、<code>BaseFragment</code>等，这里封装好了 ButterKnife ，使用注解真的可以极大的加快开发效率。<br><code>BaseImage</code> 是临时封装 <code>ImageView</code> 和 <code>Glide</code> 的，封装的很差，待改进。</p>
-<p><strong>app</strong> 是基于 GankIO 的客户端，设计到具体的业务逻辑，其项目结构大致如下：<br><figure class="image-bubble">
+<p><strong>core</strong> 是与业务逻辑无关的库，包含一些基类，如：<code>BaseActivity</code>、<code>BaseFragment</code>等，这里封装好了 <code>ButterKnife</code> ，不得不说，使用注解真的可以极大的加快开发效率。<br><code>manager</code> 包下的 <code>ActivityManager</code> 用于管理应用的 Activity 栈，但此类与系统的类重名，有待商榷<br><code>BaseImage</code> 是临时封装 <code>ImageView</code> 和 <code>Glide</code> 的，封装的很差，待改进。<br><code>utils</code> 包下是一些常见的工具类。</p>
+<p><strong>app</strong> 是基于 GankIO 的客户端，涉及到具体的业务逻辑，其项目结构大致如下：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="http://odsdowehg.bkt.clouddn.com/屏幕快照" alt="屏幕快照" title="">
                 </div>
                 <div class="image-caption">屏幕快照</div>
-            </figure><br>其中，<code>modules</code> 包下是客户端的界面，由于界面不多，所以没有细分，<code>contract</code> 是 MVP 模式的契约类，具体可以参考 Google 开源的 MVP 项目：<a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">android-architecture</a>。<code>presenter</code> 包下则是 P 层的实现，只涉及业务、数据，不涉及 UI ，UI 的操作全部封装在 V 层。</p>
-<p>如果对 MVP 模式不是很理解，可以切换到 <code>master</code> 分支，<code>master</code> 分支使用传统的 Android 架构开发。</p>
-<h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ol>
-<li>SwipeRefreshLayout 与 WebView 的滑动冲突</li>
-<li>ViewPager 的状态保存</li>
-</ol>
-<p>项目写的比较匆忙，如有问题欢迎指出~</p>
+            </figure></p>
+<p>其中，<code>modules</code> 包下是客户端的界面，由于界面不多，所以没有细分。</p>
+<p><code>contract</code> 是 MVP 模式的契约类，具体可以参考 Google 开源的 MVP 项目：<a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">android-architecture</a>。就 <code>MVP</code> 模式来说，Google 的这种方式不得不说的确很不错，在契约类中包含了 Model 、View 、 Presenter 三层的契约，查看起整体逻辑会方便很多，在一定程度上也能减少使用 MVP 模式导致的类爆炸问题。</p>
+<p><code>presenter</code> 包下则是 P 层的实现，只涉及业务、数据，不涉及 UI ，UI 的操作全部封装在 V 层。</p>
+<p><code>model</code> 包下则是 Model 层的实现，该层只负责数据请求，如果数据不是很复杂，完全可以将其与 P 层合并。<strong>个人觉得，模式这种东西提供的是一种思路，要善于变通</strong></p>
+<p>如果对 MVP 模式不是很理解，可以切换到 <code>master</code> 分支，检出 tag 为 <code>v1.0.0</code> 的提交记录，该项目最初版本为非 MVP 模式实现。</p>
+<h2 id="项目中碰到的问题小记"><a href="#项目中碰到的问题小记" class="headerlink" title="项目中碰到的问题小记"></a>项目中碰到的问题小记</h2><h3 id="SwipeRefreshLayout-与-WebView-的滑动冲突"><a href="#SwipeRefreshLayout-与-WebView-的滑动冲突" class="headerlink" title="SwipeRefreshLayout 与 WebView 的滑动冲突"></a>SwipeRefreshLayout 与 WebView 的滑动冲突</h3><p>在 <code>v1.0.0</code> 版本中，使用 <code>WebView</code> 加载页面时，存在将网页上滑到顶部时，会与 <code>SwipeRefreshLayout</code> 的下拉事件存在冲突，这里采用了一种侵入式的解决方法，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">mWebView.setOnScrollChangedListener(<span class="keyword">new</span> ScrollWebView.OnScrollChangedListener() &#123;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrollChanged</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> t)</span> </span>&#123;</div><div class="line">           Log.d(TAG, <span class="string">"l = "</span> + l + <span class="string">";t = "</span> + t);</div><div class="line">           <span class="keyword">if</span> (mWebView.getScrollY() == <span class="number">0</span>) &#123;</div><div class="line">               mSwipeRefreshLayout.setEnabled(<span class="keyword">true</span>);</div><div class="line">           &#125; <span class="keyword">else</span> &#123;</div><div class="line">               mSwipeRefreshLayout.setEnabled(<span class="keyword">false</span>);</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;);</div></pre></td></tr></table></figure>
+<h3 id="WebView-页面自适应"><a href="#WebView-页面自适应" class="headerlink" title="WebView 页面自适应"></a>WebView 页面自适应</h3><p>细心的朋友可能已经发现，图片加载跟网页加载一样，都是使用 WebView 实现，但是 WebView 加载图片时并不会自适应，所以这里需要对 WebView 进行设置。这里给出项目中对 WebView 进行的所以设置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initWebViewSettings</span><span class="params">()</span> </span>&#123;</div><div class="line">   WebSettings settings = mWebView.getSettings();</div><div class="line">   <span class="comment">// 开启 JS 支持</span></div><div class="line">   settings.setJavaScriptEnabled(<span class="keyword">true</span>);</div><div class="line">   <span class="comment">// 支持屏幕缩放</span></div><div class="line">   settings.setSupportZoom(<span class="keyword">true</span>);</div><div class="line">   <span class="comment">// 设置出现缩放工具</span></div><div class="line">   settings.setBuiltInZoomControls(<span class="keyword">true</span>);</div><div class="line">   <span class="comment">// 不显示webview缩放按钮</span></div><div class="line">   settings.setDisplayZoomControls(<span class="keyword">false</span>);</div><div class="line">   <span class="comment">// 扩大比例的缩放</span></div><div class="line">   settings.setUseWideViewPort(<span class="keyword">true</span>);</div><div class="line">   <span class="comment">//自适应屏幕</span></div><div class="line">   settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);</div><div class="line">   settings.setLoadWithOverviewMode(<span class="keyword">true</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="ViewPager-TabLayout-Fragment的状态保存"><a href="#ViewPager-TabLayout-Fragment的状态保存" class="headerlink" title="ViewPager + TabLayout + Fragment的状态保存"></a>ViewPager + TabLayout + Fragment的状态保存</h3><p>相信这个问题许多人使用 ViewPager 时都碰到过，那就是有多个 Pager 的时候，比方从第 1 个页面切换到第 5 个页面，然后再切回去，会发现 Pager 又会重新初始化一次。这就会造成一种不是很好的用户体验。其实处理这个问题很简单，在 <code>onSaveInstanceState</code> 保存你需要保存的数据，再次初始化时判断 <code>savedInstanceState</code> 是否为空即可，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState)</span> </span>&#123;</div><div class="line">   mPresenter.onSaveInstanceState(outState);</div><div class="line">   <span class="comment">//计算出当前RecyclerView垂直方向的偏移量</span></div><div class="line">   outState.putInt(<span class="string">"offset"</span>, mRecyclerView.computeVerticalScrollOffset());</div><div class="line">   <span class="keyword">super</span>.onSaveInstanceState(outState);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initData</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">   mPresenter = <span class="keyword">new</span> CategoryPresenter(<span class="keyword">this</span>);</div><div class="line">   <span class="keyword">if</span> (savedInstanceState != <span class="keyword">null</span>) &#123;</div><div class="line">       <span class="comment">//恢复之前的RecyclerView的偏移量</span></div><div class="line">       <span class="comment">//调用RecyclerView.offsetChildrenVertical可滚动指定偏移量</span></div><div class="line">       mOffset = savedInstanceState.getInt(<span class="string">"offset"</span>);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>欢迎 Star 和 Fork：<a href="https://github.com/MyLifeMyTravel/GankIO" target="_blank" rel="external">GankIO</a></p>
 
         </div>
 
@@ -244,7 +250,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-03-13T04:58:58.000Z" itemprop="dateUpdated">2017年3月13日 12:58</time>
+    最后更新时间：<time datetime="2017-03-21T15:16:11.000Z" itemprop="dateUpdated">2017年3月21日 23:16</time>
 </span><br>
 
 
